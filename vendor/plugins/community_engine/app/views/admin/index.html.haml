@@ -1,0 +1,40 @@
+- @section = "admin"
+- @subsection = "dashboard"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+#yui-main
+  .yui-g.box
+    .yui-u.first
+      %h2
+        Things to administer
+        
+      - if @approve_investigations_count > 0 || @moderate_investigations_count > 0 || @moderate_challenges_count >0 || @moderate_comments_count > 0
+      
+        - if @approve_investigations_count > 0
+          %h3
+            = link_to(pluralize(@approve_investigations_count, "investigation") + " awaiting approval", admin_investigations_path)
+        
+        - if @moderate_investigations_count > 0
+          %h3
+            = link_to(pluralize(@moderate_investigations_count, "investigation") + " awaiting moderation", admin_investigations_path)
+        - if @moderate_challenges_count > 0
+          %h3
+            = link_to(pluralize(@moderate_challenges_count, "challenge") + " awaiting moderation", admin_challenges_path)
+        - if @moderate_comments_count > 0
+          %h3
+            = link_to(pluralize(@moderate_comments_count, "update") + " awaiting moderation", admin_comments_path)
+
+      - else
+        %h3
+          There is nothing requiring moderation
+          
+      %h2
+        New users
+      %ul
+        - @new_users.each do |user|
+          %li= link_to user.login, user_path(user)
+    .yui-u
+      %h3="Recent activity"
+      =render :partial => "activities/activity", :collection => @activities
+      %p= link_to "All activity", admin_activities_path

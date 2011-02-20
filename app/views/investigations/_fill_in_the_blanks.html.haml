@@ -1,0 +1,22 @@
+- if 1==0
+  - if @investigation.allows_viewing_by?(current_user)               
+          
+    #fill_in_the_blanks.box
+      
+      - if @investigation.allows_contributions_from?(current_user) 
+        .button.add_a_blank.right
+          = button_to "Add a blank", new_investigation_blank_path(@investigation), :method => "get"
+        
+      - if @investigation.blanks.size > 0
+        %h2.left
+          Fill in the blanks
+        .clear
+          =render :partial => 'blanks/blank', :collection => @investigation.blanks, :locals => {:selected => @blank }
+      
+      - else
+        %h2
+          What do you want to know? 
+          %br
+          .light
+            Add blanks for others to fill in for you
+        .clear

@@ -1,0 +1,99 @@
+#doc2
+{
+  padding-left: 15px;
+  padding-right: 15px; 
+  font-family: "Helvetica Neue", Helvetica, Arial, Sans-serif;
+}
+
+#ft
+{
+ border-top: 4px solid #ddd;
+ margin-top: 1.5em;
+ padding-top: 1.5em;
+ margin-bottom: 3em; 
+}
+
+#hd, #bd
+{
+ font-size: 200%; 
+ letter-spacing: -0.03em;
+ font-weight: bold;
+}
+
+#hd
+{
+ margin-top:1.5em; 
+ margin-bottom:1.5em;
+}
+
+#illustration
+{
+ margin-left: -5px; 
+}
+
+h1, h2, h3, p, em
+{
+  font-weight: bold;
+}
+
+em
+{
+  font-style: italic;
+}
+
+h1
+{
+ color: red;
+ line-height: 1em;
+}
+
+h2
+{
+ color: #c2b59b;
+ line-height: 1em;
+ 
+}
+
+#hd h1
+{
+  font-size: 150%;
+}
+
+#hd h2
+{
+  margin-top: 0.5em;
+}
+
+#bd p
+{
+  font-size: 
+}
+
+#bd h1, h2, p, ol
+{
+  margin-bottom: 0.75em;
+  margin-top: 0.75em;
+}
+
+#bd h1
+{
+ margin-top:1.5em; 
+}
+
+ol li
+{
+ list-style: decimal;
+ margin-left:1.1em; 
+}
+
+.quiet
+{
+ color: #777; 
+}
+
+iframe
+{
+ height: 21em;
+ border: 3px solid #ddd;
+ padding: 1.5em;
+}

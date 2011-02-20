@@ -1,0 +1,10 @@
+<% version = @cms_item_version.version %>
+<h1 align="center">Revision <%= version %></h1>
+<hr>
+<%= @cms_item_version.data %>
+<hr>
+<%= link_to_remote "Use This Revision", 
+                   :url => { :action => 'insert_revision', 
+                             :id     => @simple_cms_item, 
+                             :version => version },  
+                   :complete => 'javascript:self.close()' %>

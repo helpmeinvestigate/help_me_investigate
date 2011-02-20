@@ -1,0 +1,44 @@
+- @section = "admin"
+- @subsection = "blanks"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+
+#yui-main
+  .yui-b.box
+    %h3
+      = :blanks.l
+
+    -if @blanks.page_count > 1
+      .pagination= paginating_links @blanks, :link_to_current_page => true
+
+    %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%"}
+      %tr
+        %th="Who"
+        %th=:blank.l
+        %th &nbsp;
+        %th &nbsp;
+        %th &nbsp;
+        
+      - @blanks.each do |blank|
+        %tr{:id => "blank_#{blank.id}", :class => blank.published_as}
+          %td
+            -if blank.user
+              = link_to h(blank.user.login), user_path(blank.user)
+          %td
+            ="#{link_to(blank.before_text.to_s + ' <i>' + blank.blank_type.to_s + '</i> ' + blank.after_text.to_s, investigation_blank_url(blank.investigation,blank))}"
+          %td
+            
+          %td
+            =link_to_remote("Trash".l, {:url => trash_investigation_blank_path(blank.investigation, blank), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "blank_#{blank.id}"), :confirm => "Are you sure you want to put this blank in the trash?"} )
+          %td
+            %div{:id => "moderate_blank_#{blank.id}"}
+              -if blank.is_live?
+                =link_to_remote("Moderate".l, {:url => moderate_investigation_blank_path(blank.investigation, blank), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "moderate_blank_#{blank.id}")})
+              -unless blank.is_live?
+                =link_to_remote("Publish".l, {:url => publish_investigation_blank_path(blank.investigation, blank), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "blank_#{blank.id}")})
+            
+            
+
+    -if @blanks.page_count > 1
+      .pagination= paginating_links @blanks, :link_to_current_page => true

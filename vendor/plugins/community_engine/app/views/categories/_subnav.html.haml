@@ -1,0 +1,8 @@
+#SubNavBar
+  %ul
+    = subnav_tab :recent.l, { :url => category_path(@category), :subsection => 'all' }
+    
+    = subnav_tab :popular.l, { :url => category_path(:popular => 'DESC'), :subsection => 'popular' }
+    - if admin?
+      = subnav_tab "New post", { :url => new_user_post_path({:user_id => current_user, 'post[category_id]' => @category.id}), :subsection => 'new' }
+  .clear

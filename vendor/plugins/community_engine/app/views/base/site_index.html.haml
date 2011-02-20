@@ -1,0 +1,84 @@
+- @section = "home"
+- @sitebar_left = false
+- @meta = { :description => AppConfig.meta_description, :keywords => AppConfig.meta_keywords, :robots => AppConfig.robots_meta_list_content }
+
+-unless logged_in?
+  = render :partial => 'homepage_banner_message'
+
+
+
+#yui-main
+  .yui-g
+    .yui-u.first
+      #join_an_investigation.box
+        %h2
+          Help someone investigate:
+          
+        - @featured.each do |feature|
+          .feature.clear
+            = render :partial => 'investigations/feature', :locals => {:investigation => feature}
+        
+        %h2.clear
+          = link_to "Browse all investigations", investigations_path
+    .yui-u
+      #start_an_investigation.box
+        %h2 
+          .left
+            %span.black
+              1. Start an investigation  
+            %span.arrow
+              &raquo;
+            %br
+            %span.grey
+              2. Invite others
+            %span.arrow
+              &raquo;
+            %br
+            %span.grey
+              3. Solve it together
+          .left
+            = help_tooltip('home_start_an_investigation')
+          .clear
+        = error_messages_for :investigation
+
+        - form_for :investigation, :url=>investigations_path do |f|
+
+          
+          = f.text_area :question, :onfocus => "clr(this);", :class => "primary", :size => '', :style=>"", :value => '(The question you want answering)'
+  
+          %p.button.left= submit_tag :post_investigation.l
+  
+          .clear
+            = hint('start_an_investigation_hint')
+    
+  .yui-gb
+    .yui-u.first
+      #recommended_investigations.box.hfeed
+        %h3
+          Your recommended investigations
+        - unless @recommended_investigations.blank?
+          = render :partial => 'investigations/investigation', :collection => @recommended_investigations
+        - else
+          %p
+            Add some tags to your profile page to start getting investigations recommended to you here.
+          
+    .yui-u
+      - @tweets = recent_tweets
+      - unless @tweets.blank?
+        #tweets.box.alt
+          %h3
+            = link_to 'Twitter', "http://twitter.com/helpmeinvestig8"
+          = render :partial=>"base/tweet", :collection=>@tweets[0..5]
+    .yui-u
+      - unless @posts.empty?
+        #posts.box.alt
+          %h3
+            Recent articles
+          %ul.list.page
+            - @posts.each do |post|
+              %li= link_to truncate(post.title, :length => 75), user_post_path(post.user, post)
+        
+- content_for :scripts do
+  = javascript_tag "function clr(el) { if (el.defaultValue==el.value) el.value = ''; }"
+
+  

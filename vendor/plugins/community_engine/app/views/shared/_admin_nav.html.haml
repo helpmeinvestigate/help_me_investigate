@@ -1,0 +1,19 @@
+.box
+  %h3=:admin.l
+
+  %ul.list.checks
+    %li= link_to :dashboard.l, admin_path
+    %li= link_to :activity.l, admin_activities_path
+    %li= link_to :investigations.l, admin_investigations_path
+    %li= link_to :blanks.l, admin_blanks_path
+    - if feature_enabled?('categories')
+      %li= link_to :categories.l, categories_path
+    /- if feature_enabled?('contests')
+    /  %li= link_to :contests.l, contests_path
+    - if feature_enabled?('skills')
+      %li= link_to :skills.l, new_skill_path 
+    - if feature_enabled?('events')
+      %li= link_to :events.l, events_path
+    %li= link_to :comments.l, admin_comments_path
+    %li= link_to :features.l, homepage_features_path
+    %li= link_to :statistics.l, statistics_path

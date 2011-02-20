@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    %link{:rel=>"shortcut icon", :href=>"/favicon.ico"}
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html;charset=utf-8"}
+
+    
+    %title= page_title
+    -if @meta
+      -@meta.each do |key|
+        %meta{:name=>key[0], :content=>key[1]}
+    
+    %meta{:name=>"verify-v1", :content=>"YJGTX+NUnjYKoOAGkCBsKWPwauQ8cBQ1FxGkpt1bMvU="}
+  
+    = stylesheet_link_merged :base
+    = stylesheet_link_merged :admin if admin?
+    
+    - if current_page?({:controller => 'posts', :action => 'show' })
+      = stylesheet_link_tag 'lightbox'	
+    - if forum_page?
+      = stylesheet_link_tag 'forum'
+      - unless @feed_icons.blank?
+        - @feed_icons.each do |feed|
+          = auto_discovery_link_tag :rss, feed[:url], :title => "Subscribe to '#{feed[:title]}'"
+      
+    - if @rss_title && @rss_url
+      = auto_discovery_link_tag(:rss, @rss_url, {:title => @rss_title})
+    
+  %body{:class=>body_classes}
+    #doc2{:class => "yui-t#{@sidebar_left ? 3 : 5}"}
+      = render :partial => "shared/header"
+            
+      #bd
+        = render :partial => "shared/messages"
+                  
+        ~ @content_for_layout
+                            
+      #ft
+
+
+      #footer
+      
+        = render :partial => "shared/footer"
+        
+    = render :partial => "shared/footer_scripts"

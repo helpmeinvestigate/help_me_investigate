@@ -1,0 +1,29 @@
+--- 
+javascripts: 
+- base: 
+  - prototype
+  - effects
+  - scriptaculous
+  - event-selectors
+  - controls
+  - prototip
+  - application
+  - uploader
+  - swfupload
+  - dragdrop
+  - cropper
+  - AC_RunActiveContent
+
+- admin:
+  - simple_cms
+
+stylesheets: 
+- base: 
+  - reset-fonts-grids
+  - lightbox
+  - prototip
+  - simple_cms
+  - screen
+- admin:
+  - coderay
+

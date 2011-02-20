@@ -1,0 +1,105 @@
+SimpleCMS
+=========
+
+Created by Slaive and PullMonkey (December 2007). This is a very good,
+easy to use cms plugin.
+
+This plugin is built for rails versions <= 2.1.0. So if you are using an older 
+version of rails then you will need to edit each of the controllers 
+uncomment this for rails versions >= 2.0 and < 2.1
+  self.view_paths << File.join(File.dirname(__FILE__), '..', 'views')
+uncomment this for rails versions < 2.0
+  self.template_root = File.join(File.dirname(__FILE__), '..', 'views')
+
+and comment out this in the lib/simple_cms.rb file
+  self.append_view_paths File.join(File.dirname(__FILE__), '..', 'app', 'views')
+
+
+SimpleCMS dependencies
+======================
+
+Once you have SimpleCMS installed you will need to install 4 more plugins:
+    - attachment_fu
+    - responds_to_parent
+    - acts_as_versioned
+    - coderay
+if you have not already.
+You can do this easily by using the command:
+    rake simple_cms:install_dependencies
+If this doesn't work you can do it manually by doing the following commands:
+    ruby script/plugin install http://svn.pullmonkey.com/plugins/trunk/attachment_fu/
+    ruby script/plugin install http://svn.pullmonkey.com/plugins/trunk/responds_to_parent/
+    ruby script/plugin install http://svn.pullmonkey.com/plugins/trunk/coderay/
+  If you are using rails versions >= 2.1.1 then install this one
+    ruby script/plugin install http://svn.pullmonkey.com/plugins/trunk/acts_as_versioned_2.1.1/
+  If you are using rails versions < 2.1.1 then install this one
+    ruby script/plugin install http://svn.pullmonkey.com/plugins/trunk/acts_as_versioned/
+
+
+You will also need to have an image processor installed. There are 3 to choose from:
+    - ImageScience - A light inline-Ruby library that only resizes images.
+    - RMagick - The grand-daddy, both in terms of advanced image processing features and memory usage.
+    - minimagick - It's much easier on memory than RMagick because it runs the ImageMagick command in a shell.
+
+Any of these programs will do.
+
+
+SimpleCMS javascript/css files
+==============================
+
+You will need to move the javascript and css files from the plugin to your
+corresponding folder in the public directory. This can be done manually but I 
+would recomend using:
+    rake simple_cms:install
+However, this should have been called automatically when you installed the 
+simple_cms plugin to start with.
+
+
+SimpleCMS migrations
+====================
+To generate the migratioin tables use this command:
+    ruby script/generate simple_cms_migrations
+
+This will create 3 tables: simple_cms_items, simple_cms_images, and 
+simple_cms_media.
+Then do your `rake db:migrate`
+
+
+Using SimpleCMS
+===============
+
+Use of the simple_cms plugin is very quick and easy. All you have to do is put a
+simple render in your view file wherever you want a simple_cms item to show up. 
+All you have to pass it is the label you want it to have and whether the user is
+admin or not. If admin is not passed it will default to false. 
+
+    Example
+    =======
+      <%= render :simpleCMS => "label", :admin  => true, 
+                                        :user   => "UserName", 
+                                        :prefix => "/your/prefix",
+                                        :reusable => true %>
+
+:simpleCMS - takes a label
+:admin - pass true if you want to give editing acces or false if you don't. 
+         Defaults to false.
+:prefix - takes the prefix of your site if you have one. Not required.
+:reusable - takes true or flase. Defaults to false. This allows you to use the 
+            same content on multiple pages. To do this the :simpleCMS label must
+            be the same in each place and :reusable must be true in each place 
+            you use it.
+            *NOTE* changing this value from true to false or false to true will
+            result in the loss of the data you had there.
+
+Make sure you put the javascript and css link tags in your application.rhtml 
+file. It should look something like this:
+<html>
+  <head>
+    <%= javascript_include_tag :defaults, "simple_cms" %>
+    <%= stylesheet_link_tag "simple_cms", "coderay" %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>
+

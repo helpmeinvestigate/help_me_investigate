@@ -1,0 +1,27 @@
+#user-menu-tip
+  %ul
+    
+    %li= link_to :edit_profile.l, edit_user_path(current_user) 
+    %li= link_to :edit_account.l, edit_account_user_path(current_user)          
+    %li= link_to :manage_posts.l, manage_user_posts_path(current_user)          
+
+  %hr
+  %ul
+    %li= link_to :view_profile.l, user_path(current_user)                    
+    %li=link_to :blog.l, user_posts_path(current_user)
+    %li=link_to :photos.l, user_photos_path(current_user)
+    %li=link_to :clippings.l, user_clippings_path(current_user)
+    %li=link_to :friends.l, accepted_user_friendships_path(current_user)        
+  %hr
+  =link_to :log_out.l, logout_path
+- content_for :scripts do    
+
+  %script{:type => "text/javascript"}
+    :plain
+      new Tip('user-menu', $('user-menu-tip'), {
+        hook:{target: 'bottomRight', tip: 'topRight'},
+        hideOn: false, 
+        hideAfter: 1.5,  
+        className: 'silver',
+        offset: {y:2, x:12}
+        });

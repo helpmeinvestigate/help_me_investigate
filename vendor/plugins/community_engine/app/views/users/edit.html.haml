@@ -1,0 +1,94 @@
+- @section = 'users'
+- @subsection = 'edit_profile'
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+- form_tag user_url(@user), :method => 'put', :multipart =>true, :class => 'MainForm' do
+  
+  = error_messages_for :user
+  
+
+      
+  #yui-main
+    .box
+      %h2
+        Edit your profile
+    .yui-b
+      .yui-g
+        .yui-u.first
+    
+          #profile_details.box
+            %h3=:profile_photo.l
+            = @user.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
+            = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid" )
+            %label
+              =:choose_a_photo_for_your_profile.l
+            = file_field :avatar, :uploaded_data, :size => "20"
+
+          .box
+            %h3=:gender.l
+            %fieldset
+              %legend
+                =:gender.l
+              %label
+                = radio_button :user, :gender, User::MALE
+                =:male.l
+              %label
+                = radio_button :user, :gender, User::FEMALE
+                =:female.l
+            
+        .yui-u
+          .box
+            %h3=:about_me.l
+            = text_area :user, :description
+      
+          .box.alt
+            =:tips.l + ":"
+            = render :partial => 'shared/bio_help'
+            =:feel_free_to_embed_images_or_videos.l + "("
+            %a{"href"=>"/faq#images_and_flash", "target"=>"new"} 
+              =:how_do_i_do_that.l
+            )
+
+          - if @user.vendor? 
+            = render :partial => 'offerings/chooser'
+      
+      
+          .box
+            %h3= "You elsewhere on the web"
+            #elsewhere
+              %label
+                Website address (Beginning 'http://')
+              = text_field :user, :website
+              %label
+                Blog address (Beginning 'http://')
+              = text_field :user, :blog
+              %label
+                Twitter username (Without the '@' symbol)
+              = text_field :user, :twitter_username
+                
+          .box
+            %h3= :tags.l
+            #user_tags
+              = text_field_tag 'tag_list', @user.tag_list, {:autocomplete => "off"}
+              #tag_list_auto_complete.auto_complete
+              - content_for :scripts do
+                = auto_complete_field 'tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [',', ' ']  }
+          
+              %label
+                %em
+                  =:you_could_tag_yourself.l
+                  - if @user.vendor?
+                    =:custom_friendly_local.l
+                  - else
+                    = AppConfig.meta_keywords.split(",")[0..3].join(", ")
+                  %br
+                  =:tags_are_comma_separated_keywords_that_describe_you.l
+                  %br
+                  =:you_can_browse_all_content_and_users_on.l
+                  = AppConfig.community_name
+                  =:by_looking_at_the.l
+                  = link_to :tags_page.l, tags_path
+
+      %p
+        = submit_tag :save_changes.l

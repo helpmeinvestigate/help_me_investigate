@@ -1,0 +1,8 @@
+= render :partial => 'about_nav'
+
+#yui-main
+  .yui-b
+    .box
+      %h2
+        =:advertise_on.l
+        = render :simpleCMS => "Base:Advertise", :admin => admin?

@@ -1,0 +1,16 @@
+- @section = "investigations"
+- @subsection = "new"
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+#start_an_investigation.box
+  %h2#new_investigation= :new_investigation.l
+    
+  = error_messages_for :investigation
+  - form_for :investigation, :url=>investigations_path, :html => {:class => "MainForm"} do |f|
+    = render :partial => "form", :object => f
+    %p= submit_tag :post_investigation.l, :or => link_to(:cancel.l, investigations_path)
+
+- content_for :scripts do
+  = javascript_tag "$('investigation_question').focus();"

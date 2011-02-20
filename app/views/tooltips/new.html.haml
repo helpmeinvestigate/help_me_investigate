@@ -1,0 +1,9 @@
+- @section = "tooltips"
+
+.box
+  %h3#new_tooltip= :new_tooltip.l
+    
+  = error_messages_for :tooltip
+  - form_for :tooltip, :url=>tooltips_path(), :html => {:class => "MainForm"} do |f|
+    = render :partial => "form", :object => f
+    %p= submit_tag :post_tooltip.l, :or => link_to(:cancel.l, home_path())

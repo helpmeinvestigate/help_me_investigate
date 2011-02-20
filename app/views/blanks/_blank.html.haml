@@ -1,0 +1,76 @@
+- selected = nil if local_assigns[:selected].nil? 
+- blank_selected_class = "deselected"
+- unless selected.blank?
+  - if selected == blank
+    - blank_selected_class = "selected"
+%div.blank_holder{:class=> blank_selected_class}
+  %h4    
+    - unless blank.consensus.blank?
+      = link_to blank.consensus, investigation_blank_path(blank.investigation, blank), :class=>"blank filled"
+    - else
+      = link_to "(" + blank.blank_type + ")", investigation_blank_path(blank.investigation, blank), :class=>"blank"
+    = blank.after_text
+    - if blank.consensus.blank?
+      ?
+    
+- if selected == blank
+  .add_a_fact
+    - if @blank.investigation.allows_contributions_from?(current_user) 
+
+      - if logged_in? || AppConfig.allow_anonymous_commenting
+        - content_for :scripts do    
+        
+          %script{:type=>"text/javascript"} 
+            :plain
+              function scrollToNewestComment(){
+                loc = document.location.toString();
+                if (loc.indexOf("#") != -1){
+                  parts = loc.split('#')
+                  loc = parts[0] + "#newest_comment"
+                } else {
+                  loc = loc + "#newest_comment";
+                }
+                document.location.href = loc;
+              }
+
+        .errors
+        - form_remote_for(:comment, :loading => "$$('div#comments div.errors')[0].innerHTML = ''; $('comment_spinner').show();", :before => "tinyMCE.activeEditor.save();", :url => investigation_blank_comments_url(@blank.investigation,@blank), :html => {:id => 'new_comment_form', :class => "MainForm"}) do |f|
+      
+          %label{"for"=>"comment[answer"}
+            ="#{'Your answer'.l}:"
+          = f.text_field :answer, :size => 35
+      
+          %label{"for"=>"comment[link"}
+            ="#{'Link'.l}:"
+            %em="(#{"Required; every piece of evidence must be backed up by a relevant web link".l})"
+          = f.text_field :link, :size => 35, :value => "http://"
+      
+          %label
+            The reason
+            %em="Please keep this factual".l 
+          = text_area :comment, :comment, :size => '3'
+
+          - if !logged_in? && AppConfig.recaptcha_pub_key && AppConfig.recaptcha_priv_key 
+            .right{:style => 'margin-top:2em;'}= recaptcha_tags :ajax => true
+            %label{"for"=>"comment[author_name"}
+              ="Name:".l
+              %em="(#{'Optional'.l})"
+            = f.text_field :author_name, :size => 35
+            %label{"for"=>"comment[author_email"}
+              ="#{'E-mail'.l}:"
+              %em="(#{"Required; won't be shown on site".l})"
+            = f.text_field :author_email, :size => 35
+            %label{"for"=>"comment[author_email"}
+              ="Web site (include http://):".l
+              %em="(#{'Optional'.l})"
+            = f.text_field :author_url, :size => 35      
+
+          = hidden_field_tag :commentable_type, "Blank"
+          = hidden_field_tag :commentable_id, @blank.id
+          %p
+            = submit_tag "Add this".l
+            = image_tag 'spinner.gif', :plugin => "community_engine", :style => 'display:none;', :id => 'comment_spinner'
+      - else
+        = link_to "Log in to leave a comment".l, new_blank_comment_path(@blank)
+        = :or.l
+        = link_to "Create an account".l, signup_path

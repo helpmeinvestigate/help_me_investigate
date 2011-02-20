@@ -1,0 +1,11 @@
+- case search_item.class.name
+  - when "Investigation"
+    = render :partial=>"investigations/investigation", :locals=>{:investigation=>search_item}
+  - when "Tag"
+    = render :partial=>"tags/tag", :locals=>{:tag=>search_item}
+  - when "Comment"
+    = render :partial=>"comments/comment", :locals=>{:comment=>search_item}
+  - when "Blank"
+    = render :partial=>"blanks/blank", :locals=>{:blank=>search_item}
+  - when "User"
+    = render :partial=>"users/user", :locals=>{:user=>search_item}

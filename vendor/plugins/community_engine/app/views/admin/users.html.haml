@@ -1,0 +1,42 @@
+- @section = "admin"
+- @subsection = "users"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+#yui-main
+  .yui-b.box
+    %h3
+      = AppConfig.community_name
+      = :members.l
+    - form_tag '/admin/users', :class => 'MainForm' do
+      %label= :user_login.l
+      = text_field_tag 'login', params['login']
+      %label= :user_e_mail.l
+      = text_field_tag 'email', params['email']
+      %p
+        %input{:type=>"submit", :value=> :search_users.l }
+
+    -if @users.page_count > 1
+      .pagination= paginating_links @users, :link_to_current_page => true
+
+    %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%"}
+      %tr
+        %th=:login.l
+        %th=:e_mail.l
+        %th=:status.l
+        %th=:actions.l
+        
+      - @users.each do |user|
+        %tr
+          %td
+            = link_to h(user.login), user_path(user)
+          %td
+            = h user.email
+          %td
+            = user.active? ? 'active'.l : 'inactive'.l
+          %td
+            = link_to( :assume_id.l , assume_user_path(user) )
+            = (" | " + link_to(:activate.l, :controller => "/admin", :action => "activate_user", :id => user.id)) unless user.active?
+
+    -if @users.page_count > 1
+      .pagination= paginating_links @users, :link_to_current_page => true

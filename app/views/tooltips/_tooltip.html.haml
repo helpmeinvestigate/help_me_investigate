@@ -1,0 +1,5 @@
+.tip
+  = tooltip.tip
+  
+- if logged_in? && admin?
+  = link_to 'Edit', edit_tooltip_path(tooltip)

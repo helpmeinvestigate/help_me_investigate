@@ -1,0 +1,17 @@
+.box
+  %h2
+    Frequently Asked Questions
+    
+  = render :simpleCMS => "Base:FAQ", :admin => logged_in? && admin?
+
+  %h3
+    Questions:
+  
+  %ul
+    = render :partial => 'faqs/faq_link', :collection => @faqs
+          
+
+= render :partial => 'faqs/faq', :collection => @faqs
+
+- if admin?
+  = link_to "Add an FAQ", new_faq_path()

@@ -1,0 +1,9 @@
+- @section = "investigation"
+
+.box
+  %h3#new_blank= :new_blank.l
+    
+  = error_messages_for :blank
+  - form_for :blank, :url=>investigation_blanks_path(@investigation), :html => {:class => "MainForm"} do |f|
+    = render :partial => "form", :object => f
+    %p= submit_tag :post_blank.l, :or => link_to(:cancel.l, investigation_path(@investigation))

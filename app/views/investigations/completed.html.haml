@@ -1,0 +1,27 @@
+- @section = "investigations"
+- @subsection = "completed"
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+#yui-main
+
+  .yui-b
+  
+
+    
+    .box.investigations.hfeed
+      %h2
+        Completed investigations
+      %h3
+        (or The Help Me Investigate Hall of Fame)
+
+      %p
+        These are investigations that have been successfully completed. If you're working on an investigation that's reached a conclusion, mark it as complete to see it here.
+        
+        
+      = render :partial => 'investigation', :collection => @investigations
+
+      .pagination=paginating_links @investigations if @investigations.page_count > 1
+.yui-b
+  = render :partial => "find_investigations_right"

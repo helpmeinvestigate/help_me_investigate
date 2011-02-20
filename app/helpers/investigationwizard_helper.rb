@@ -1,0 +1,2 @@
+module InvestigationwizardHelper
+end

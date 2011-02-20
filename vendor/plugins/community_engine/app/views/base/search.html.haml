@@ -1,0 +1,19 @@
+- @section = "investigations"
+- @subsection = "search"
+
+#yui-main
+
+  .yui-b
+    .box.first
+    
+      %h2
+        Search results for
+        “
+        =params[:q]
+        ”
+      .box.investigations.hfeed
+
+        = render :partial => 'search_item', :collection => @results
+
+.yui-b
+  

@@ -1,0 +1,11 @@
+- if logged_in?
+  #SubNavBar
+  
+    %ul
+      = subnav_tab :dashboard.l, { :url => dashboard_user_path(current_user) , :subsection => 'dashboard' }
+      = subnav_tab :my_profile.l, { :url => user_path(current_user) , :subsection => 'my_profile' }
+      = subnav_tab :edit_profile.l, { :url => edit_user_path(current_user) , :subsection => 'edit_profile' }
+      = subnav_tab :edit_account.l, { :url => edit_account_user_path(current_user), :subsection => 'edit_account'}
+      = subnav_tab :activity.l, { :url => network_user_activities_path(current_user), :subsection => 'activity' }
+      /= subnav_tab :coinvestigators.l, { :url => user_path(current_user), :subsection => 'coinvestigators' }
+    .clear

@@ -1,0 +1,2 @@
+page.replace_html :dynamic_media_list, :partial => 'show_media_list', 
+                  :locals => { :media => @media }

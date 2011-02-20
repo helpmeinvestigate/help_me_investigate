@@ -1,0 +1,97 @@
+- @section = "investigations"
+- @subsection = "all"
+- @side_bar = true
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+.box
+  %h2 
+    Can you help investigate these things?
+
+
+  #featured.hfeed
+    #featured_investigations
+      .yui-gb
+        - @featured.each do |feature| 
+          - if feature == @featured.first
+            .yui-u.first
+              = render :partial => 'investigations/investigation', :object => feature
+        
+          - else
+            .yui-u
+              = render :partial => 'investigations/investigation', :object => feature
+        .yui-u
+          .new_investigation
+            %h2
+              Got something you would like help investigating?
+            .button
+              = button_to :new_investigation.l, new_investigation_path, :rel => 'bookmark', :method => 'get'
+            
+      %h3.right
+        = link_to "All features", featured_investigations_path
+
+#yui-main
+
+
+
+  .yui-b
+    .box
+          
+      .yui-g
+        #recent.yui-u.first.hfeed
+          %h3
+            .left
+              = link_to "Recent", investigations_path
+            .right
+              = rss_icon formatted_investigations_path(:rss)
+            .clear
+          = render :partial => 'investigations/investigation', :collection => @investigations
+          
+          %h3
+            = link_to "All investigations", recent_investigations_path
+            
+        #popular.yui-u.hfeed
+          %h3
+            .left
+              = link_to "Popular", popular_investigations_path
+            .right
+              = rss_icon formatted_popular_investigations_path(:rss)
+            .clear
+          = render :partial => 'investigations/investigation', :collection => @popular
+          
+          %h3
+            = link_to "All popular investigations", popular_investigations_path
+
+
+
+.yui-b
+    
+  .box.top
+    %h3
+      = link_to "Who's active?", users_path
+    %ol.active_users
+      - @active_users.each do |user|
+        %li.active_user.clear
+          - begin
+            - u_path = user_path(user)
+            %a.left{:href=>"#{u_path}",  :class=>"photo", :rel=>"bookmark"}
+              =image_tag((user.avatar_photo_url(:thumb)), :alt=>user.login, :width=>"30", :height=>"30")
+            .left
+              = link_to user.login, u_path
+              \(
+              = user.activities_count
+              \)
+          - rescue
+          
+  .box.top
+    %h3
+      .left
+        = link_to 'Browse by tag', tags_path
+      .left
+        = help_tooltip('user_tags_etc')
+    .clear  
+    
+    .tag_cloud  
+      - tag_cloud @tags, %w(nube1 nube2 nube3 nube4 nube5) do |name, css_class|
+        = link_to name, tag_url(URI::encode(name, /[\/.?#]/)), :class => css_class, :rel => :tag

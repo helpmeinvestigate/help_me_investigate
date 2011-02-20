@@ -1,0 +1,42 @@
+div.enable_disable_controls {
+  float: right;
+  padding-top: 2px;
+  padding-bottom: 10px;
+}
+
+div.simple_cms_item {
+  padding: 2px;
+}
+
+div.simple_cms_item_admin {	
+  padding: 2px;
+}
+
+div.over_simple_cms {	
+  padding: 1px;
+  /* background-color: #ccf; */
+  border: 1px solid #99a;
+  /* cursor: pointer; */
+}
+
+div.controls {
+  display: none;
+}
+
+div.over_simple_cms div.controls {
+  display: block;
+  float: right;
+  cursor: pointer;
+  background-color: #ffc;
+  border: 1px dashed #aa8;
+  border-right: 1px solid #ffc;
+  border-top: 1px solid #ffc;
+  padding: 3px 10px;
+  font-size: 70%;
+}
+
+div.simple_cms_form textarea {
+	font-size: 15px;
+	height: 30em;
+	width: 50em;
+}

@@ -1,0 +1,25 @@
+#start_an_investigation.box
+  %h2 
+    .left
+      %span.grey
+        1. Start an investigation  
+      %span.arrow
+        &raquo;
+      %span.black
+        2. Invite others
+      %span.arrow
+        &raquo;
+      %span.grey
+        3. Solve it together
+    .left
+      = help_tooltip('home_start_an_investigation')
+    .clear
+    
+  %h3
+    Here's your investigation. Now 
+    = link_to "invite people to help you", new_user_invitation_path(current_user, :investigation_id => @investigation.id), {:method=> :get}
+  %p
+    - if @investigation.is_draft?
+      At the moment no one else can see it because <a href="/braddy">Paul</a> needs to check it's not libellous, or spam. 
+      %br
+      Once he's given it the thumbs-up, it'll go public - along with any information you add now. <a href="/faqs">The FAQ page</a> has more details.

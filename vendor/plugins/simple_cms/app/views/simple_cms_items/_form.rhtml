@@ -1,0 +1,18 @@
+<% %>
+<div class="simple_cms_form box">
+	<h2 id="revision_heading">Editing "<%= @simple_cms_item.label %>"
+  <div id="revision_title" style="display: inline">
+    - Revision <div id="version_id" style="display: inline"><%= @simple_cms_item.version %></div>
+  </div>
+  </h2>
+  
+
+  <div class="quiet">(Use Textile markup for all text. Eg: *bold*, h3. and h4. for headings, * bullet)</div>
+
+<%= text_area :simple_cms_item, :data %>
+<br/>
+	<%= submit_tag "Save Content", :style => "float:left;" %>
+  <%= button_to "Cancel", {}, :name => 'commit', :style => "float:left;",
+                              :confirm => "Are you sure you want to discard your changes?" %>
+	<br/>
+</div>

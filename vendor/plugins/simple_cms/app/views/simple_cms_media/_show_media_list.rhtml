@@ -1,0 +1,9 @@
+<% if @media.size > 0 %>
+<ul>
+  <% @media.each do |media| %>
+    <%= render :partial => "media_item", :object => media %>
+  <% end %>
+</ul>
+<% else %>
+  No Media Upload Yet.
+<% end %>

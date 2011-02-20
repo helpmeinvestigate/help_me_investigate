@@ -1,0 +1,15 @@
+%label{"for"=>"title"}= "Title"
+= form.text_field :title, :class => "primary"
+
+%label{"for"=>"description"}= "Describe the challenge"
+= form.text_area :description, :class => "primary"
+
+%label{"for"=>"url"}= "Add an external link <em>(optional)</em>"
+= form.text_field :url, :class => "primary"
+
+%label{"for"=>"url_description"}= "Describe the link <em>(optional)</em>"
+= form.text_field :url_description, :class => "primary"
+
+- if admin?
+  %label{"for"=>"completed"}= "Completed"
+  = form.check_box :completed, :class => "primary"

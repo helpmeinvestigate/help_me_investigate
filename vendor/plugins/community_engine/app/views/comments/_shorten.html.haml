@@ -1,0 +1,19 @@
+
+-if comment.answer.blank?
+  -unless comment.short_link.blank?
+    %a{"href"=> comment.short_link, "rel"=>"bookmark"}
+      
+      = comment.link_title unless comment.link_title.blank?
+      = truncate(comment.link) if comment.link_title.blank?
+  - else
+    %a{"href"=> comment.link, "rel"=>"bookmark"}
+      = comment.link_title unless comment.link_title.blank?
+      = truncate(comment.link) if comment.link_title.blank?
+    
+-else
+  -unless comment.short_link.blank?
+    %a{"href"=> comment.short_link, "rel"=>"bookmark"}
+      %h3=comment.answer
+  - else
+    %a{"href"=> comment.link, "rel"=>"bookmark"}
+      =comment.answer

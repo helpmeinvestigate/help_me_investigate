@@ -1,0 +1,5 @@
+<p>Hi <%= @message.recipient.login %>,</p>
+
+<%= RedCloth.new(@message.body).to_html %>
+
+<p>You can reply to this message here: <%= auto_link(user_message_url(@message.recipient, @message)) %></p>

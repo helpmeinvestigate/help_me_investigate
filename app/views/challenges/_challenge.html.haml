@@ -1,0 +1,52 @@
+- unless challenge.blank?
+
+  - unless challenge.investigation.blank?
+
+    .challenge{:class=> challenge.css_classes(current_user), :id => "challenge_" + challenge.id.to_s}
+    
+      .short
+        %h3.short_title
+          %a{:class=>"challenge_link",:href=>investigation_challenge_path(challenge.investigation,challenge)}
+            = challenge.title
+        %p.quiet 
+          = time_ago_in_words(challenge.updated_at)
+          
+
+          
+      .full.hide
+        .description
+          = render :partial=>'challenges/accept_button', :object => challenge
+      
+          - if @investigation.blank?
+            .which_investigation.box
+              For
+              = link_to challenge.investigation.question, investigation_path(challenge.investigation)
+    
+
+          - unless challenge.completed
+            .description.box
+              -unless challenge.url.blank? || challenge.url = 'http://' 
+                %p
+                  %em.link
+                    Link:
+                  = link_to challenge.url_description, challenge.url
+              = clean( challenge.description )
+
+
+
+     
+          - if challenge.investigation.allows_contributions_from?(current_user) 
+            - unless challenge.comment.blank?
+
+              %h4
+                
+                %a{:class=>'spch-bub-inside', :href=>'investigation_challenge_path(challenge.investigation,challenge)'}
+                  .point
+                  %em= pluralize(challenge.comments.count, "update")
+                  
+
+    
+            #comments.comments.most_recent_comment
+
+              = render :partial => "comments/comment", :object => challenge.comment unless challenge.comment.blank?
+      .clear

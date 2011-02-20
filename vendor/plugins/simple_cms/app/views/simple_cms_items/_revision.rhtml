@@ -1,0 +1,17 @@
+<% %>
+<tr>
+  <td align="center">
+    <% data = revision.data ? revision.data.gsub(/[\r\n]|\r|\n/,'').gsub(/&/, "&amp;").gsub(/"/, "\\\"") : revision.data %>
+    <%= link_to_remote revision.version.to_s + ((revision.version == @simple_cms_item.version)? " (current)": ""), 
+          :url => {:action  => 'show_revision', 
+                   :id      => @simple_cms_item, 
+                   :version => revision.version},
+          :complete => "window.frames['mce_editor_0'].document.body.innerHTML = \"#{data}\";scroll(0,0);" %>
+  </td>
+  <td align="left">On <%= revision.updated_at %> by 
+  <% begin 
+      print User.find_by_id(revision.updated_by.to_i).login
+      rescue 
+          print "someone" 
+         end %></td>
+</tr>

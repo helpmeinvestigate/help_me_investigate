@@ -1,0 +1,11 @@
+- task = monitoring
+- if task.receive_emails
+  - receive_class = 'receive'
+- else
+  - receive_class = 'not_receive'
+  
+.monitoring_task{:id=>"task_#{task.id}", :class=>receive_class}
+  - if task.receive_emails
+    = link_to_remote "Receiving email updates for this challenge", :update=>"monitoring", :url=>toggle_investigation_challenge_task_path(@investigation,@challenge,task), :method=>"put"
+  - else
+    = link_to_remote "Not receiving email updates for this challenge", :update=>"monitoring", :url=>toggle_investigation_challenge_task_path(@investigation,@challenge,task), :method=>"put"

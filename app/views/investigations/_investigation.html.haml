@@ -1,0 +1,32 @@
+- if investigation.published_as == "live"
+  .hentry.box
+    .investigation{:class=> investigation.css_classes(current_user)}
+      %h4.entry-title{:id=>"investigation_#{ investigation.id}"}
+        = link_to investigation.question, investigation_path(investigation), :rel => 'bookmark'
+      .sparkline
+        = image_tag spark_investigation_url(investigation) 
+    .speech{:class=> investigation.css_classes(current_user)}
+  
+      .vcard.author
+        
+        %a.right{:class=>'spch-bub-inside', :href=>investigation_path(investigation)}
+          .point
+          %em= investigation.comments.size
+         
+
+        %a{:href=>"#{investigation_path(investigation)}", :class=>"photo", :rel=>"bookmark"}
+          =image_tag((investigation.user.avatar_photo_url(:thumb)), :alt=>"", :width=>"30", :height=>"30") 
+  
+        %strong 
+          = link_to investigation.user.login, user_path(investigation.user)
+        
+          - if investigation.investigatings.size > 0
+            and
+            %br
+            %span.others_count
+              = pluralize((investigation.investigatings.size - 1), "other")
+              
+
+      
+    
+

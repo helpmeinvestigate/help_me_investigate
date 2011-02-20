@@ -1,0 +1,26 @@
+<% if @images.size > 0 %>
+<ul>
+  <% @images.each_with_index do |image, i| %>
+    <li style="padding:0;margin:0;list-style-type:none;display:inline;">
+      <a href="#" onclick="ts_insert_image('<%= image.public_filename %>', 'ALT TEXT');">
+      <% if @thumb_images[i] -%> 
+        <div class="image<%= "_ie" if request.env["HTTP_USER_AGENT"] =~ /MSIE/ %>" id="image_<%= image.id %>" onmouseover="show_image_controls($(this),<%= image.id %>)" onmouseout="hide_image_controls($(this),<%= image.id %>)">
+          <%= image_tag( @thumb_images[i].public_filename, :align => "top" ) %></a>
+          <span id="controls_<%= image.id %>" class="controls">
+            <%= link_to_remote( 
+                        image_tag("/javascripts/tiny_mce/plugins/ts_advimage/images/delete-icon_grey.jpg", 
+                               :width => "25", :height => "25", :alt => "delete", :title => "Delete Image"), 
+                        :url => { :action => 'destroy', :id => image.id }, 
+                        :html => { :class => "controls" }, 
+                        :confirm => "This will permanentally delete this image and everywhere you are linked to it will disapear.\n\nAre you sure you want to delete this image?" ) %>
+          </span>
+        </div>
+      <% else %>
+        <%= image.filename + "<br />" %></a>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<% else %>
+  No Images Upload Yet.
+<% end %>

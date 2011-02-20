@@ -1,0 +1,461 @@
+ html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}body {font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}table {font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+body{text-align:center;}#ft{clear:both;}#doc,#doc2,#doc3,#doc4,.yui-t1,.yui-t2,.yui-t3,.yui-t4,.yui-t5,.yui-t6,.yui-t7{margin:auto;text-align:left;width:57.69em;*width:56.25em;min-width:750px;}#doc2{width:73.076em;*width:71.25em;}#doc3{margin:auto 10px;width:auto;}#doc4{width:74.923em;*width:73.05em;}.yui-b{position:relative;}.yui-b{_position:static;}#yui-main .yui-b{position:static;}#yui-main{width:100%;}.yui-t1 #yui-main,.yui-t2 #yui-main,.yui-t3 #yui-main{float:right;margin-left:-25em;}.yui-t4 #yui-main,.yui-t5 #yui-main,.yui-t6 #yui-main{float:left;margin-right:-25em;}.yui-t1 .yui-b{float:left;width:12.30769em;*width:12.00em;}.yui-t1 #yui-main .yui-b{margin-left:13.30769em;*margin-left:13.05em;}.yui-t2 .yui-b{float:left;width:13.8461em;*width:13.50em;}.yui-t2 #yui-main .yui-b{margin-left:14.8461em;*margin-left:14.55em;}.yui-t3 .yui-b{float:left;width:23.0769em;*width:22.50em;}.yui-t3 #yui-main .yui-b{margin-left:24.0769em;*margin-left:23.62em;}.yui-t4 .yui-b{float:right;width:13.8456em;*width:13.50em;}.yui-t4 #yui-main .yui-b{margin-right:14.8456em;*margin-right:14.55em;}.yui-t5 .yui-b{float:right;width:18.4615em;*width:18.00em;}.yui-t5 #yui-main .yui-b{margin-right:19.4615em;*margin-right:19.125em;}.yui-t6 .yui-b{float:right;width:23.0769em;*width:22.50em;}.yui-t6 #yui-main .yui-b{margin-right:24.0769em;*margin-right:23.62em;}.yui-t7 #yui-main .yui-b{display:block;margin:0 0 1em 0;}#yui-main .yui-b{float:none;width:auto;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf,.yui-gc .yui-u,.yui-gd .yui-g,.yui-g .yui-gc .yui-u,.yui-ge .yui-u,.yui-ge .yui-g,.yui-gf .yui-g,.yui-gf .yui-u{float:right;}.yui-g div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first,.yui-ge div.first,.yui-gf div.first,.yui-g .yui-gc div.first,.yui-g .yui-ge div.first,.yui-gc div.first div.first{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf{width:49.1%;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{width:32%;margin-left:1.99%;}.yui-gb .yui-u{*margin-left:1.9%;*width:31.9%;}.yui-gc div.first,.yui-gd .yui-u{width:66%;}.yui-gd div.first{width:32%;}.yui-ge div.first,.yui-gf .yui-u{width:74.2%;}.yui-ge .yui-u,.yui-gf div.first{width:24%;}.yui-g .yui-gb div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first{margin-left:0;}.yui-g .yui-g .yui-u,.yui-gb .yui-g .yui-u,.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u,.yui-ge .yui-g .yui-u,.yui-gf .yui-g .yui-u{width:49%;*width:48.1%;*margin-left:0;}.yui-g .yui-gb div.first,.yui-gb .yui-gb div.first{*margin-right:0;*width:32%;_width:31.7%;}.yui-g .yui-gc div.first,.yui-gd .yui-g{width:66%;}.yui-gb .yui-g div.first{*margin-right:4%;_margin-right:1.3%;}.yui-gb .yui-gc div.first,.yui-gb .yui-gd div.first{*margin-right:0;}.yui-gb .yui-gb .yui-u,.yui-gb .yui-gc .yui-u{*margin-left:1.8%;_margin-left:4%;}.yui-g .yui-gb .yui-u{_margin-left:1.0%;}.yui-gb .yui-gd .yui-u{*width:66%;_width:61.2%;}.yui-gb .yui-gd div.first{*width:31%;_width:29.5%;}.yui-g .yui-gc .yui-u,.yui-gb .yui-gc .yui-u{width:32%;_float:right;margin-right:0;_margin-left:0;}.yui-gb .yui-gc div.first{width:66%;*float:left;*margin-left:0;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf .yui-u{margin:0;}.yui-gb .yui-gb .yui-u{_margin-left:.7%;}.yui-gb .yui-g div.first,.yui-gb .yui-gb div.first{*margin-left:0;}.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u{*width:48.1%;*margin-left:0;}s .yui-gb .yui-gd div.first{width:32%;}.yui-g .yui-gd div.first{_width:29.9%;}.yui-ge .yui-g{width:24%;}.yui-gf .yui-g{width:74.2%;}.yui-gb .yui-ge div.yui-u,.yui-gb .yui-gf div.yui-u{float:right;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf div.first{float:left;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf div.first{*width:24%;_width:20%;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf .yui-u{*width:73.5%;_width:65.5%;}.yui-ge div.first .yui-gd .yui-u{width:65%;}.yui-ge div.first .yui-gd div.first{width:32%;}#bd:after,.yui-g:after,.yui-gb:after,.yui-gc:after,.yui-gd:after,.yui-ge:after,.yui-gf:after{content:".";display:block;height:0;clear:both;visibility:hidden;}#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}
+#overlay{ position:absolute; z-index:100; top:0; left:0; width:100%; height:100%; background-color:#000; -moz-opacity: 0.8; opacity:.80; filter: alpha(opacity=80)}
+#overlay[id]{  position:fixed}
+div.lightbox {position:absolute; width:550px; background:#ddd; padding:10px; border:2px solid #eee; color:#6F6F6F; z-index:102}
+.lightbox a {color:#9F9F9F}
+#close {position:absolute; top:-5px; right:-5px; cursor:pointer}
+ .prototip {text-align: left}
+ .prototip .default {width: 250px; color: #808080}
+.prototip .default .toolbar {background: #f1f1f1; font-weight: bold}
+.prototip .default .title {padding: 5px}
+.prototip .default .content {padding: 5px; background: #fff}
+ .prototip .basic {width: 250px; color: #808080}
+.prototip .basic .toolbar {background: #f1f1f1; font-weight: bold}
+.prototip .basic .title {padding: 5px}
+.prototip .basic .content {padding: 5px; background: #fff}
+ .prototip .hint {width: 250px; color: #313120; background: #fff6aa}
+.prototip .hint .toolbar {background: #fdf1a0; font-weight: bold}
+.prototip .hint .title, .prototip .hint .content {padding: 5px}
+ .prototip .protoblue {width: 250px; color: #fff}
+.prototip .protoblue .toolbar {background: #0d7cd0; font-weight: bold}
+.prototip .protoblue .title {padding: 5px}
+.prototip .protoblue .content {background: #1e90ff; padding: 5px}
+ .prototip .creamy {width: 250px; color: #bb9c61}
+.prototip .creamy .toolbar {background: #f3edc2; font-weight: bold}
+.prototip .creamy .title {padding: 5px}
+.prototip .creamy .content {background: #f8f4ca; padding: 5px}
+ .prototip .darkgrey {width: 250px; color: #fff}
+.prototip .darkgrey .toolbar {background: #5f5f5f; font-weight: bold}
+.prototip .darkgrey .title {padding: 5px}
+.prototip .darkgrey .content {background: #808080; padding: 5px}
+ .prototip .protogrey {width: 250px; color: #fff; background: #fff}
+.prototip .protogrey .toolbar {background: #969c92; font-weight: bold}
+.prototip .protogrey .title {padding: 5px}
+.prototip .protogrey .content {color: #808080; padding: 5px}
+ .prototip .protogrey .toolbar .close {width: 14px; height: 14px}
+ .prototipLoader {position: absolute; top: -1000px; left: -1000px; height: 14px; width: 14px; border: 1px solid #dddddd; overflow: hidden}
+ .prototip{position:absolute;overflow:hidden;}.prototip .tooltip,.prototip .toolbar,.prototip .toolbar .title{position:relative;}.prototip .content{clear:both;}.prototip .toolbar .close{position:relative;text-decoration:none;float:right;width:19px;height:15px;display:block;line-height:0;font-size:0;border:0;cursor:pointer;}.prototip .tooltip{clear:both;float:left;}.prototip .borderLeftWrapper,.prototip .borderRightWrapper{position:absolute;top:0;left:0;width:300px;height:20px;}.prototip .borderFrame{height:100%;width:100%;float:left;margin:0;padding:0;position:relative;}.prototip .borderTop,.prototip .borderBottom{overflow:hidden;}.prototip .borderRow{list-style-type:none;float:left;width:100%;position:relative;clear:both;margin:0;padding:0;}.prototip_CornerWrapper{position:absolute;top:0;left:0;width:100%;height:100%;margin:0;padding:0;clear:both;}.prototip_Corner{float:left;position:relative;}.prototip canvas{position:relative;float:left;}.prototip_CornerTr,.prototip_CornerBr{float:right;}.prototip_BetweenCorners{position:absolute;top:0;left:0;width:100%;overflow:hidden;clear:both;}.prototip .borderMiddle{position:relative;float:left;}.prototip .borderCenter{position:relative;float:left;height:100%;}.prototip_StemWrapper{position:relative;width:100%;height:auto;clear:both;}.prototip_StemBox{float:left;position:relative;}.prototip_Stem{width:100%;position:absolute;overflow:hidden;}.iframeShim{position:absolute;border:0;margin:0;padding:0;background:none;overflow:hidden;}.prototip .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}.prototip .clearfix{display:inline-block;}
+.prototip .clearfix{display:block;}
+div.enable_disable_controls {float: right; padding-top: 2px; padding-bottom: 10px}
+div.simple_cms_item {padding: 2px}
+div.simple_cms_item_admin {padding: 2px}
+div.over_simple_cms {padding: 1px;  border: 1px solid #99a;  }
+div.controls {display: none}
+div.over_simple_cms div.controls {display: block; float: right; cursor: pointer; background-color: #ffc; border: 1px dashed #aa8; border-right: 1px solid #ffc; border-top: 1px solid #ffc; padding: 3px 10px; font-size: 70%}
+div.simple_cms_form textarea {font-size: 15px; height: 30em; width: 50em}
+                          span.localized {font-style: italic; color: red}
+   #doc2{ color: #464337}
+a{color: #45f;}
+a:hover{color: #f66}
+p{margin: 0 0 1em 0;}
+div.auto_complete {width: 350px; background: #ffffff}
+div.auto_complete ul {border: 1px solid #888888; list-style-type: none; margin: 0; padding: 0; width: auto}
+div.auto_complete ul li {margin: 0; padding: 3px}
+div.auto_complete ul li.selected {background-color: #FFFDC0}
+.clear {clear: both;}
+.right {float: right;}
+.left {float:left;}
+.centered {text-align:center}
+img.polaroid {padding:5px; border: 4px solid #eee}
+   #hd {background-color: white; margin-bottom: 1.5em; margin-top: 1.5em}
+#hd h1{float: left; margin:0; margin-top:-0.5em;}
+.subtitle {margin-top: -1em; display: block; position:relative; top: 0.25em; color: #777; width: 16em}
+#hd h1 a{ font-size: 200%; font-weight: bold; text-decoration: none; display: block; color: #fe2222; padding-bottom: 0.5em; padding-top: 0.5em; line-height: 80%}
+.nologo {}
+#hd h1 a:hover{text-decoration: underline;}
+#hd h2{ float: right; font-size: 138.5%; margin-top: 25px; margin-bottom:0.5em}
+ #MyInvestigations {margin-left: -10em; margin-top: 0.75em}
+#MyInvestigations select {width: 24em}
+#NavBar{ background-color: #fff; clear: both}
+#NavBar .home {width: 5em}
+#NavBar ul, #NavBar ul li{float: left;}
+#NavBar ul li a{ display: block; font-size: 108%; padding: 7px 15px 13px 15px; font-weight: bold; text-decoration: none; background-color: #f6f6f6; -moz-border-radius-topleft: 0.5em; -webkit-border-top-left-radius: 0.5em; border-top-left-radius: 0.5em; -moz-border-radius-topright: 0.5em; -webkit-border-top-right-radius: 0.5em; border-top-right-radius: 0.5em}
+#NavBar ul li {margin-right: 10px}
+#NavBar ul li.motto {padding: 7px 0px 13px; font-size: 108%; font-weight: bold; color: #ff0000}
+body.home #NavBar ul li a, body.beta #NavBar ul li a {padding: 7px; -moz-border-radius: 0.5em !important; -webkit-border-radius: 0.5em !important; border-radius: 0.5em !important}
+#NavBar ul li#active a, #NavBar ul li.current a{ background: #eee; color: black; text-decoration: none !important}
+#NavBar ul li a:hover{text-decoration: underline; color: black;}
+#search {margin-top: 1em}
+#search form label{display: none;}
+#search form input{ font-size: 108%; padding: 4px 15px 4px 5px; background: #fff url(/images/search.gif) no-repeat right center; border: 2px solid #aaa; margin-right: 0.5em; margin-top: -4px}
+#NavBar ul li.new_investigation a {background: url(/images/icons/add.png) no-repeat 10px center; padding-left: 31px}
+#NavBar ul li.new_investigation.current a {background: #fff url(/images/icons/add.png) no-repeat 10px center}
+#NavBar ul li.home.current a {background: #fff}
+#NavBar ul li.investigations a { }
+#NavBar ul li.investigations.current a { }
+#NavBar ul li.messages a {background: url(/images/icons/email.png) no-repeat 10px center; padding-left: 31px}
+#NavBar ul li.messages.current a {background: #eaeaff url(/images/icons/email.png) no-repeat 10px center}
+#NavBar ul li.invite a {background: url(/images/icons/user_go.png) no-repeat 10px center; padding-left: 31px}
+#NavBar ul li.invite.current a {background: #eaeaff url(/images/icons/user_go.png) no-repeat 10px center}
+#NavBar ul li.challenges a {background: url(/images/icons/lightning.png) no-repeat 10px center; padding-left: 31px}
+#NavBar ul li.challenges.current a {background: #eaeaff url(/images/icons/lightning.png) no-repeat 10px center}
+#NavBar ul li.users a {background: url(/images/icons/group.png) no-repeat 10px center; padding-left: 31px}
+#NavBar ul li.users.current a {background: #eaeaff url(/images/icons/group.png) no-repeat 10px center}
+#NavBar ul li.my_profile a {  }
+#NavBar ul li.my_profile.current a { }
+#NavBar ul li.admin a {}
+#NavBar ul li.admin.current a {}
+#UserMenu {text-align: right; padding:0.2em; padding-right:0.5em; color: #666 }
+#UserMenu a {}
+ #SubNavBar{ background-color: #eee; border-left: 6px solid #eee; border-top:6px solid #eee; clear: both; position:relative; top: -6px; display: block; -moz-border-radius: 0.5em; -webkit-border-radius: 0.5em; border-radius: 0.5em}
+#SubNavBar ul, #SubNavBar ul li{float: left;}
+#SubNavBar ul li a{ display: block; font-size: 108%; padding: 7px 15px; font-weight: bold; color: #678; text-decoration: none}
+#SubNavBar ul li#active a, #SubNavBar ul li.current a, #SubNavBar ul li.current.menu_button a{ background: #fff; text-decoration: none !important; color: black; -moz-border-radius-topleft: 0.25em; -webkit-border-top-left-radius: 0.25em; border-top-left-radius: 0.25em; -moz-border-radius-topright: 0.25em; -webkit-border-top-right-radius: 0.25em; border-top-right-radius: 0.25em}
+#SubNavBar ul li a:hover{text-decoration: underline; color: #ff2222;}
+#SubNavBar form{float: right;}
+#SubNavBar form label{display: none;}
+#SubNavBar form input{ font-size: 108%; padding: 4px 15px 4px 5px; margin: 4px 10px 0 0; background: #fff url(/images/search.gif) no-repeat right center; border: none}
+#SubNav ul li.menu_button a {background-color: #ccc !important; -moz-border-radius-topright: 0.5em !important; -webkit-border-top-right-radius: 0.5em !important; border-top-right-radius: 0.5em !important}
+   #welcome .box{ background: #f1ffb2; margin-top: 1em; padding: 1.5em}
+#welcome .box h2{ font-size: 197%; margin-bottom:.5em}
+#welcome .box h2 a{color: #466337;}
+#welcome ol {margin-bottom: 0}
+   .box{ margin-bottom: 1em}
+.box h2{ margin-bottom: .5em; font-weight: bold; font-size: 153.9%}
+.box h3{ font-size: 123.1%; font-weight: bold;  margin:1.5em 0 1em 0}
+.alt{ border-bottom: 3px solid #dde; padding-bottom: 1em}
+.alt h3{ border: none; color: #38465b}
+.first_alt {margin-top:3.25em}
+   html {background-color: #fff}
+#doc3, #ft, #footer {background-color:#fff}
+#doc3 {padding-left: 30px; padding-right: 30px; padding-bottom: 30px}
+   .list{ }
+.list li{ padding:3px 0; border-bottom: 1px dotted #a2a19b}
+div.checks li, div.page li, div.investigate li, div.admin li, div.admin li, div.tags li, ul.checks li, ul.page li, ul.investigate li, ul.admin li, ul.tags li{ padding-left: 20px; background-color: transparent; background-image: url(/images/icons/accept.png); background-repeat: no-repeat; background-position: left center}
+ul.checks li{background-image: url(/images/icons/accept.png)}
+ul.page li{background-image:url(/images/icons/page_white.png)}
+ul.tags li{background-image:url(/images/tag_green.png)}
+ul.investigate li{background-image:url(/images/icons/magnifier.png)}
+ul.admin .edit {background-image:url(/images/icons/pencil.png)}
+ul.admin .delete {background-image:url(/images/icons/delete.png)}
+ul.admin .trash {background-image:url(/images/icons/trash.png)}
+ul.admin .lock{background-image:url(/images/icons/lock.png)}
+ul.admin .unlock{background-image:url(/images/icons/lock_open.png)}
+ul.admin .complete{background-image:url(/images/icons/door.png)}
+ul.admin .uncomplete{background-image:url(/images/icons/door_open.png)}
+ul.admin .feature{background-image:url(/images/icons/heart_off.png)}
+ul.admin .unfeature{background-image:url(/images/icons/heart.png)}
+ dl.vcard{ margin-bottom: 1em}
+dl.vcard dt.photo{ float: left; width: 66px; margin: 0}
+dl.vcard dt.photo a img{ display: block; padding: 2px; border: 1px solid #a2a19b; background: #fff}
+dl.vcard dt.photo a:hover img{background: #a2a19b;}
+dl.vcard dd{ margin-left: 66px}
+dl.vcard dd.fn a{ font-size: 108%; font-weight: bold}
+dl.vcard dd.member, dl.vcard dd.post, dl.vcard dd.rss{ padding: 2px 0 2px 20px; border-top: 1px dotted #a2a19b; background-position: left center; background-repeat: no-repeat; background-color: transparent}
+dl.vcard dd.member{background-image: url(/images/icons/user.png);}
+dl.vcard dd.post{background-image: url(/images/icons/page_white.png);}
+dl.vcard dd.rss{background-image: url(/images/icons/rss.png);}
+div.rss {font-size: 100%; height:16px; width: 16px; background-image: url(/images/icons/feed.png)}
+div.rss a {width: 16px; height:16px; display: block}
+div.rss span.hidden {display:none}
+h6.all{margin:.5em 0;}
+h6.all a{ font-size: 85%; font-weight: bold; text-transform: uppercase; background: transparent url(/images/icons/add.png) no-repeat left center; padding:3px 0 3px 20px; color: #379d00}
+ label{ font-weight: bold}
+.MainForm{ }
+.MainForm label{ display: block; margin: 1em 0 2px 0}
+.MainForm label em{ font-style: italic; font-family: Georgia, Times, serif; color: #777}
+.MainForm select{ border:1px solid #ccc}
+.MainForm input, .MainForm textarea{ border: 1px solid #ccc; padding: 5px; font-size: 123.1%; font-weight: bold; color: #777; background: #f8f8f8}
+.MainForm input:focus, .MainForm textarea:focus{ color: #777; border-color: #777; background: #fff}
+.MainForm input.wrong, .MainForm .fieldWithErrors input {border-color: #f00; color: #f00; background: #ffd5d5}
+ .MainForm p input, p input, .button form input, p button, .button a {padding-left: 1em; padding-right: 1em; background: #ccff00; border: 4px solid #339966; text-decoration: none; color: #118822; margin: 1em 0; width: auto; cursor: pointer}
+.button a, .button input {padding: 5px; font-weight: bold; margin-top:0}
+.button a:hover {background-color: white}
+p.button input {margin-top:0px !important}
+.MainForm p input:hover, p.button a:hover, .button form input:hover {background:#fff;}
+.MainForm strong{color: #f00;}
+.MainForm strong.ok{color: #008000;}
+.MainForm strong em{ text-decoration: underline; font-weight: bold;}
+.MainForm textarea{ width: auto}
+ .MainForm fieldset {margin: 1em 0 0 0;}
+.MainForm fieldset label{ margin: 4px 0; color: #777}
+.MainForm fieldset input{ border: none; width: auto}
+.MainForm fieldset.inline label{ display: inline; margin-right: 1em}
+.warning, #errorExplanation, .errorExplanation{ padding: 1em 1em 1em 1em; margin: 1em 0; border: 4px solid #fc0; background: #fff3c5; color: #6b5e2b; font-size: 125%; font-weight:bold}
+#start_an_investigation form {padding-right:2em}
+#featured_investigations {padding: 1.5em; background-color: #ffeeaa}
+#featured_investigations h3 {margin-top: -2em}
+   #ft{ padding-bottom: 1em; border-bottom: 3px solid #ddd}
+#ft .yui-u .box{margin:0 1em 0 0;}
+#ft .first .box{margin:0 0 0 1em;}
+#ft .yui-u .box h3{ color: #666; border-color: #666}
+ .fresh dl{ clear: both; border-bottom: 1px dotted #ccc; padding: 3px 0}
+.fresh dt{ float: left; padding-right: 1em}
+.fresh dd{ }
+.fresh dt {padding-left: 20px; background-image: url(/images/icons/activity_default.png); background-repeat: no-repeat; background-position: left center; background-color: transparent}
+.fresh .comment dt {background-image: url(/images/icons/comment.png);}
+.fresh .photo dt {background-image: url(/images/icons/picture.png);}
+.fresh .clipping dt {background-image: url(/images/icons/book.png);}
+.fresh .updated_profile dt {background-image: url(/images/icons/user_edit.png);}
+.fresh .favorite dt {background-image: url(/images/icons/heart_add.png);}
+.fresh .post dt, .fresh .sb_post dt, .fresh .topic dt{background-image: url(/images/icons/post.png);}
+   #footer{ margin: 20px 0; font-size: 85%;}
+#footer p{ }
+#footer a {color: #456}
+   #NavBar:after, .hentry:after, .box:after, dl.vcard:after, .fresh dl:after, #CommunityFooter:after, .hentry .tags:after {content: "."; display: block; height: 0; clear: both; visibility: hidden}
+* html #NavBar, * html .hentry, * html .box, * html dl.vcard, * html .fresh dl, * html #CommunityFooter, * html .hentry .tags {display: inline-table;}
+ #NavBar, .hentry, .box, dl.vcard, .fresh dl, #CommunityFooter, .hentry .tags {height: 1%;}
+#NavBar, .hentry, .box, dl.vcard, .fresh dl, #CommunityFooter, .hentry .tags {display: block;}
+  ul.sortable {list-style:none; border:1px solid #ccc; min-height:20px; line-height:1.5em; padding:0}
+ul.sortable li {cursor: move}
+ul.sortable_hover {border:1px dashed #328E01; background:#efefef}
+ul#skills {width:250px; height:200px; overflow:auto}
+ul#skills li {background:#ffffff; margin:.5em; padding:.5em; border:1px solid #cccccc}
+ul#users_skills {width:250px; background:#eee; overflow:hidden}
+ul#users_skills li {background:#ffffff; margin:.5em; padding:.5em; border:1px solid #cccccc}
+.handle {cursor:move}
+ div.pagination {margin: 10px; clear:both}
+div.pagination div.pagination_info {float:right}
+div.pagination a {margin-right:0.3em; padding:0.4em}
+div.pagination a:hover {background:#828282; color:#ffffff; margin-right:0.3em; padding:0.4em}
+div.pagination a.active {background:#828282; border:none; color:#ffffff}
+ .clippings_grid {background: #fff}
+.clippings_grid .row .clipping {border: 1px solid #ccc; padding: 10px 15px 20px 15px; margin: 10px 20px 20px 20px; width: 200px; float: left}
+.clippings_grid .row .clipping img.clipping_image {width: 200px}
+.clippings_grid .row .clipping p {font-size: 85%; margin-top: 10px}
+ .nube1 {font-size: 1.0em}
+.nube2 {font-size: 1.3em}
+.nube3 {font-size: 1.4em}
+.nube4 {font-size: 1.5em}
+.nube5 {font-size: 1.6em}
+.nube6 {font-size: 1.8em}
+.selected {color: #268999}
+ div.user_list .row {margin:1em 0 1em 0; margin-bottom:1.5em; padding:0.5em}
+div.user_list .row h3 {}
+div.user_list div.vcard {width: 100%;}
+div.user_list div.vcard ul {margin-left: 0; font-size: 85%}
+ #photos img.polaroid, #clippings img.polaroid {margin: 0 12px 15px 0}
+ #profile_details div.vcard{ width: 100%;}
+#profile_details .vcard ul{ margin-left: 0px;}
+ .box h3 ul.subnav {display:inline; font-size: .7em; font-weight:normal; text-transform:none; margin:0 0 0 10px}
+ul.subnav li {display:inline;}
+ul.subnav li a.active {color:#000; text-decoration:none;}
+ .progressWrapper {width: 357px; overflow: hidden}
+.progressContainer {margin: 5px; padding: 4px; border: solid 1px #E8E8E8; background-color: #F7F7F7; overflow: hidden}
+.progressContainer .red {border: solid 1px #B50000; background-color: #FFEBEB}
+.progressContainer .green {border: solid 1px #eaeaff0DD; background-color: #EBFFEB}
+.progressContainer .blue {border: solid 1px #CEE2F2; background-color: #F0F5FF}
+.progressName {font-size: 8pt; font-weight: bold; color: #555555; width: 323px; height: 14px; text-align: left; white-space: nowrap; overflow: hidden}
+.progressBarInProgress, .progressBarComplete, .progressBarError {font-size: 0px; width: 0%; height: 2px; background-color: blue; margin-top: 2px}
+.progressBarComplete {width: 100%; background-color: green; visibility: hidden}
+.progressBarError {width: 100%; background-color: red; visibility: hidden}
+.progressBarStatus {margin-top: 2px; width: 337px; font-size: 7pt; font-family: Verdana; text-align: left; white-space: nowrap}
+div.uploadStatus {margin: 5px}
+div.progressBar {margin: 5px}
+div.progressBar div.border {background-color: #fff; border: 1px solid gray; width: 100%}
+div.progressBar div.background {background-color: #333; height: 18px; width: 0%}
+.mceEditor .left {float:none}
+.mceEditor table {margin: 0}
+.mceEditor table th {padding: 0; margin: 0; border: inherit; font-weight: normal}
+.mceEditor table td {padding: 0; margin: 0; border: inherit}
+.mceEditor table tfoot {font-style: inherit}
+.mceEditor table caption {background: none}
+.mceEditor table img {margin: 0 0 0}
+ table th {font-weight: bold; border-bottom: 1px solid #ccc}
+table td {padding: 5px}
+ ul.message_nav li {background-position: left; background-repeat: no-repeat; padding-left:20px}
+ul.message_nav li.inbox_new {background-image: url(/images/icons/email_open.png);}
+ul.message_nav li.inbox {background-image: url(/images/icons/email.png);}
+ul.message_nav li.sent {background-image: url(/images/icons/email_go.png);}
+ul.message_nav li.compose {background-image: url(/images/icons/email_edit.png);}
+.messages .photo a img{ float: left; display: block; padding: 2px; border: 1px solid #a2a19b; background: #fff}
+table.messages tbody td {border-bottom: 1px solid #ccc}
+.messages .photo a:hover img{background: #a2a19b;}
+.messages em {font-style: italic; font-family: Georgia, Times, serif; color: #777}
+.messages td.meta {font-size: 85%; text-align: right}
+pre.message_body {padding: 10px; border: 1px solid #ccc; background: #efefef; white-space: pre-wrap;  white-space: -moz-pre-wrap;  white-space: -pre-wrap;  white-space: -o-pre-wrap;  word-wrap: break-word;  }
+table.poll {width: 100%; margin-bottom: 3em}
+table.poll td {border-bottom: none}
+table.poll td .vote {display: block; float: left; background: url(/images/icons/vote.png) no-repeat left; padding: 0 10px 0 20px; height: 20px; margin-right: 10px; border-right: 1px solid #ccc}
+table.poll td.bars {width: 50%}
+table.poll td.bars div.bar-container {border: 1px solid #ccc; width: 90%; margin: 0px 5px 2px 0; padding: 1px; float: left; background: white; height: 1em}
+table.poll td.bars div.bar-container .bar {background-color: #cfe1f1; height: 12px; font-size: 10px; text-align: right; padding-right: 2px}
+ #user-menu {padding-right: 15px; background: url(/images/icons/bullet_arrow_down_50.png) no-repeat right}
+#user-menu:hover {background: url(/images/icons/bullet_arrow_down.png) no-repeat right}
+   #start_an_investigation {background-color: #ccff00; padding:1em}
+#start_an_investigation h2 {color: #370 !important}
+#start_an_investigation .button {margin-top: 0.5em}
+#start_an_investigation .button input {background-color: #cfa}
+#join_an_investigation {background-color: #ffcc00; padding: 1em}
+#join_an_investigation h2 {color: #730 !important; line-height: 1.5em}
+#take_a_challenge {}
+#take_a_challenge h2 {color: #553}
+#take_a_challenge .challenge, .challenges .challenge {background-color: #ffffdd; margin-bottom:0.5em; border: 4px solid #eee; padding: 0.75em}
+#join_an_investigation .investigation {background-color: white}
+h2 .grey {color: gray}
+.arrow {color: white}
+#home_activity, div.activity, #recent_activity {}
+#home_activity h2, .activity h2, #recent_activity h2 {color: #565}
+.challenge h3 {margin-top: 0}
+.investigation {border: 4px solid #eee; background-color: white; padding: 0.5em; position: relative}
+.investigation h4 {z-index: 3; position: relative}
+.investigation .sparkline {z-index: 2; position:absolute; bottom: 0; right: 0}
+.investigation.accepted {border: 4px solid #fd9; background-color: white; padding: 0.5em}
+.investigation.accepted h4 a {color: #c50}
+.investigation.draft {border: 4px solid orange; background: #fff url(/images/icons/hourglass.png) no-repeat; background-position: 0.2em 0.8em; padding-left: 2em}
+.investigation.moderate {border: 4px solid red; background: #fff url(/images/icons/exclamation.png) no-repeat; background-position: 0.2em 0.8em; padding-left: 2em}
+.investigation.moderate h4 a {color: #660000}
+.investigation.locked {border: 4px solid gray; background: #fff url(/images/icons/lock.png) no-repeat; background-position: 0.2em 0.8em; padding-left: 2em}
+.investigation.locked h4 a {color: #666}
+.investigation.completed {border: 4px solid #33aa33; background: #fff url(/images/icons/accept.png) no-repeat; background-position: 0.2em 0.8em; padding-left: 2em !important}
+.investigation.completed h4 a {color: #006600}
+.investigation a:hover {color: #f66 !important}
+.challenge.accepted {border: 4px solid #ffaa33 !important; background: #fed !important}
+.challenge.completed {border: 4px solid #33aa33 !important; background: #dfd !important}
+.challenge.completed h3 {background: #dfd url(/images/icons/accept.png) no-repeat; background-position: 0.2em 0.1em; padding-left: 2em !important}
+.full_challenge.completed #challenge-title h2 {background: #fff url(/images/icons/accept.png) no-repeat; background-position: 0.2em 0.1em; padding-left: 2em !important; color: #282}
+.challenge.completed h3 a {color: #282}
+.challenge a:hover {color: #f66 !important}
+.investigation.completed.locked {border: 4px solid #33aa33; background: #fff url(/images/icons/lock.png) no-repeat; background-position: 0.2em 0.8em; padding-left: 2em}
+tr.draft {border-bottom: 4px solid orange; background-color: #ffeeaa}
+tr.moderate {border-bottom: 4px solid red; background-color: #ffeeee}
+#draft_notice {background-color: #ffdddd; background: #ffdddd url(/images/icons/hourglass.png) no-repeat; background-position: 0.2em 0.4em; padding: 0.5em; padding-left: 2em; font-weight:bold; margin-bottom:1em}
+#featured_notice {background-color: #ffdddd; background: #ffdddd url(/images/icons/heart.png) no-repeat; background-position: 0.2em 0.4em; padding: 0.5em; padding-left: 2em; font-weight:bold; margin-bottom:1em}
+#moderated_notice {background: #ffdddd url(/images/icons/error.png) no-repeat; background-position: 0.2em 0.4em; padding: 0.5em; padding-left: 2em; font-weight:bold; margin-bottom:1em}
+#completed_notice {padding: 0.5em; font-weight:bold; margin-bottom:1em; background: #ddffdd url(/images/icons/accept.png) no-repeat; background-position: 0.2em 0.4em; padding-left: 2em}
+#locked_notice {padding: 0.5em; font-weight:bold; margin-bottom:1em; background: #ffdddd url(/images/icons/lock.png) no-repeat; background-position: 0.2em 0.4em; padding-left: 2em}
+.investigation img {margin-right: 1em}
+.investigation h4 {font-size: 150%}
+.investigation h4 a {text-decoration: none; border-bottom: 2px solid #eee}
+#investigation-title {padding:1.5em; background-color: white; margin-bottom:0.5em; border:8px solid #edd}
+.full_investigation.accepted #investigation-title {border:8px solid #ffaa33}
+.full_investigation.completed #investigation-title {border:8px solid #ded}
+.full_investigation.completed #investigation-title h1 a {color: #006600}
+#challenge-title {padding:1.5em; background-color: white; margin-bottom:0.5em; border:8px solid #edd}
+.full_challenge.accepted #challenge-title {border:8px solid #ffdd66}
+.full_challenge.completed #challenge-title {border:8px solid #ded}
+#breadcrumb {margin-bottom: 0.5em; margin-top: -1.5em}
+#breadcrumb span {padding:0.5em}
+#breadcrumb span a {color:black}
+#investigation-title h1 {font-size:200%; font-weight: 100}
+.full_investigation h1 .button * {font-size: 82.5%}
+.button form input, h1 .button {margin: 0 !important}
+.full_investigation h1 a {color: black; text-decoration: none}
+.investigation_description {padding-top: 1em; padding-bottom: 1em; margin-bottom: 1em}
+.investigation_description .photo {margin-right: 1em}
+#investigation_question {background-color: #feb; font-weight: 100; font-size:150%; padding:0.5em; width: 100%}
+#small_investigation_question input {background-color: #fff; color: #522; font-size:150%; font-weight: 100; padding:0.5em; width: 24em; margin-right:1em; border: 2px solid black}
+#fill_in_the_blanks {line-height: 185%; padding: 1em; background-color: #ded}
+#fill_in_the_blanks .blank_holder {padding: 0.5em; border: 2px solid #eee; margin-bottom:0.5em; background-color: white}
+#fill_in_the_blanks .selected {background-color: #ffe; padding: 0.3em; border: 2px solid #ff9; margin-bottom: 0px; border-bottom:0px}
+#fill_in_the_blanks .blank {background-color: #fff !important; border: 2px solid #844; color: #999; margin-left: 0.33em; margin-right: 0.33em; padding: 0.1em; padding-right: 24px; background: url(/images/icons/pencil.png) no-repeat right; white-space: nowrap}
+.blank_holder h4 {font-size:133%}
+#fill_in_the_blanks .button {margin-right: 1em}
+#comment #comments {margin-top: 1.5em; padding-top: 1.5em; border-top: 4px solid #eee}
+.single_blank h3 {margin:0}
+.consensus {background-color: #efe; padding-top: 1em; margin-top:1em; padding-right: 1em}
+.consensus form p {margin-top: -1em; margin-bottom: 0}
+.consensus h3 {margin-right: 1em}
+.add_a_fact {background-color: #eee; border: 2px solid #ff9; border-top: 0px; padding: 0.3em; margin-bottom: 0.5em}
+.consensus {padding: 1.5em}
+.consensus .save_or_cancel {display:block; padding-top:0.5em}
+.consensus .save_or_cancel input {margin:0; margin-right:0.5em}
+.consensus h3 {margin-left: 0px; font-weight: bold}
+#consensus input {width: auto}
+.filled {color: black; border: 2px solid #484}
+.add_a_blank {margin-top: -0.5em; margin-left: 0.5em}
+.photo img {border: 2px solid white}
+#investigation_question {border: 3px solid #666}
+.outline * {border: 1px solid red}
+#comments .hentry {background-color: white; padding:1em; margin-bottom:1em; border: 4px solid #f6f6f6}
+#comments .hentry ul, #comments .hentry ul li {display:inline; margin-right: 1em}
+#comments .hentry h5 {float: left; margin-right: 1em}
+.faq {padding: 1.5em; background-color: #eee; margin-bottom:1.5em}
+.faq h3 {margin-top: 0}
+.help_tooltip {width:16px; height:16px; background: url(/images/icons/help.png) no-repeat; cursor: pointer}
+.help_tooltip span {display: none}
+.speech {background: url(/images/speech_lighter_grey.gif) no-repeat; background-position: 1em 0; padding-top: 0.5em}
+.speech .author .photo {margin-right: 0.5em}
+#right_speech {float: right; margin-right: -18px; padding-top:3em}
+.speech_background {background-color: #edd; width: 18px; height: 36px}
+.speech_icon {width: 18px; height: 36px}
+.mini_photo {margin-right:0.3em}
+.started_by a {margin-right:0.5em}
+.light {font-weight: 100}
+h3.completed {margin-top:0px; background-color: #ddeedd; border: 4px solid #ccddcc; color: #aaccaa; padding:0.5em; font-size: 100%}
+.request_moderation form input {padding-left: 2.5em; background: #ffcc00 url(/images/icons/exclamation.png) no-repeat; background-position: 0.2em 0.4em; border: 4px solid #993366; color: #881122}
+.set_a_challenge {margin-top:-0.5em; width:100%; display: block}
+.set_a_challenge form input {padding-left: 2.5em; background: #ccff00 url(/images/icons/lightning_add.png) no-repeat; background-position: 0.2em 0.4em; border: 4px solid #339966; color: #118822; width:100%; display: block}
+p.add_a_link a {background: #ccff00 url(/images/icons/world_add.png) no-repeat; background-position: 0.2em 0.4em; padding-left: 2.5em}
+p.add_a_link a:hover, p.add_a_link a:active {background: #ffffff url(/images/icons/world_add.png) no-repeat; background-position: 0.2em 0.4em}
+p.set_a_challenge a {background: #ccff00 url(/images/icons/lightning_add.png) no-repeat; background-position: 0.2em 0.4em; padding-left: 2.5em}
+p.set_a_challenge a:hover, p.set_a_challenge a:active {background: #ffffff url(/images/icons/lightning_add.png) no-repeat; background-position: 0.2em 0.4em}
+p.invite_people a {background: #ccff00 url(/images/icons/user_add.png) no-repeat; background-position: 0.2em 0.4em; padding-left: 2.5em}
+p.invite_people a:hover, p.invite_people a:active {background: #ffffff url(/images/icons/user_add.png) no-repeat; background-position: 0.2em 0.4em}
+p.set_a_challenge {margin-top:0.5em}
+#add_a_comment {background-color: white; border: 4px solid #ceb; padding: 1em; margin-bottom: 0.5em; padding-bottom: 0}
+#new_challenge {background-color: white; border: 2px solid #ceb; padding: 1em; margin-bottom: 0.5em; padding-bottom: 0}
+.hide {display:none}
+.hidden { }
+#new_comment_form, #new_challenge_form {font-size: 123.1%}
+#new_comment_form textarea, #new_challenge_form textarea {width:100%; height: 6em}
+.content_item h3 {font-size: 133%; font-weight: bold}
+.content_item h4 {font-size: 112.5%; font-weight: bold}
+.content_item h5 {font-weight: bold}
+.content_item ul li {list-style: circle; margin-left: 3em; margin-bottom:1.5em}
+.content_item ol li {list-style: decimal; margin-left: 3em; margin-bottom:1.5em}
+.comment .entry-content, .comment .entry-link {margin-top:1.5em}
+.comment li.fn a {color: black; font-weight:bold}
+.comment li.update a {color: #777}
+.activity a {color: #777}
+.author a {color: black; font-weight: bold}
+h3 a {}
+.top {margin-top: 1.5em}
+.quiet {color: #999}
+.debug, .debug div {border: 1px solid red}
+#investigation_top {margin-bottom:1.5em}
+.challenge h4 {font-weight:bold; margin-bottom:1.5em}
+.yui-b {background-color: white}
+#yui-main .yui-b {background-color: white; padding-top: 0}
+.admin_notice {background-color: #ffee00; padding: 1.5em; margin-bottom: 1.5em; font-size: 133%; font-weight:bold}
+#add_a_comment h3 {margin-top: 0 !important}
+.entry-content {margin-left: 68px}
+#investigation-title .first .description {margin-bottom: 3em}
+h3.challenge-url {margin-bottom: 1.5em}
+.challenge h4 {font-weight: bold}
+.challenge .button {margin-top: -0.5em; margin-left: 1.5em}
+h2 ol {list-style: decimal; margin-left:1.1em; margin-bottom: 1.5em}
+h2 ol li {list-style: decimal}
+body.beta #hd {padding-top: 1.5em}
+.invite_people {clear: both; margin-top: 3em}
+.comment .moderate {background-image: url(/images/icons/allicons/bullet_error.png); background-repeat: no-repeat; padding-left: 20px}
+.challenge h4 {margin-bottom: 1.5em}
+div.entry-content ul, div.entry-content ul li, {list-style-type: disc !important; text-indent: 1.5em }
+.post .vcard {float: left; width:120px; color: #999}
+.post .vcard a {color: #888}
+.post .entry-content {margin-left: 140px}
+.post {margin-bottom: 1.5em; padding-bottom: 1.5em; border-bottom: 4px solid #ddd}
+ol.active_users {display: block !important}
+ol.active_users li {display: block !important; clear: both}
+::selection {background: #fe4902; color: white;  }
+::-moz-selection {background: #fe4902; color: white;  }
+.tag_cloud a {color: #666}
+.tag_cloud a:hover {color: #f66}
+ .spch-bub-inside, .spch-bub-outside {position: relative}
+a.spch-bub-inside, a.spch-bub-outside {color: #999; text-decoration: none}
+.spch-bub-inside em, .spch-bub-outside em {font-style: normal}
+.spch-bub-inside em {background: #999; color: #FFF; padding: 0 0.4em; -moz-border-radius: 0.25em; -webkit-border-radius: 0.25em; border-radius: 0.25em; position: relative}
+.spch-bub-inside .point, .spch-bub-outside .point {width: 0; height: 0; position: absolute; top: 1.1em; left: 0.4em; display: block; border-left: 0.45em solid #999; border-bottom: 0.45em solid #FFF;  border-bottom: 0.45em solid rgba(0,0,0,0); overflow: hidden;  }
+.spch-bub-outside {padding-left: 2.0em}
+.spch-bub-outside .bubble {top: 0; left: 0; display: block; position: absolute; height: 1.1em; width: 1.8em; background: #999; -moz-border-radius: 0.25em; -webkit-border-radius: 0.25em; border-radius: 0.25em}
+a.spch-bub-inside:hover, a.spch-bub-outside:hover {color: #F00}
+a.spch-bub-inside:hover em, a.spch-bub-outside:hover .bubble {cursor: pointer; background: #F00; color: #FF0}
+a.spch-bub-inside:hover .point, a.spch-bub-outside:hover .point {border-left: 0.5em solid #F00}
+div.spch-bub-outside {height: 1.5em; width: 0}
+.close {width: 16px; height: 16px; background-image: url(/images/icons/allicons/cross.png); background-repeat: no-repeat; display: block; float: right}
+#monitoring {margin-bottom: 1.5em}
+.receive {padding-left: 24px; background-image: url(/images/icons/allicons/tick.png); background-repeat: no-repeat; display: block}
+.not_receive {padding-left: 24px; background-image: url(/images/icons/allicons/cross.png); background-repeat: no-repeat; display: block}
+h3.website {padding-left: 24px; background-image: url(/images/icons/allicons/world.png); background-repeat: no-repeat; display: block}
+h3.blog {padding-left: 24px; background-image: url(/images/icons/allicons/newspaper.png); background-repeat: no-repeat; display: block}
+h3.twitter {padding-left: 24px; background-image: url(/images/icons/twitter.gif); background-repeat: no-repeat; display: block}
+h3.private_message {padding-left: 24px; background-image: url(/images/icons/allicons/email.png); background-repeat: no-repeat; display: block}
+#buzz {background-color: #eee}
+#buzz .quote {padding:1.5em}
+#hidden_login_box {display:none}
+#login_link {background-color: #eee; padding: 0.5em; -moz-border-radius: 0.5em; -webkit-border-radius: 0.5em; border-radius: 0.5em; width: 6em; line-height: 0.75em; float: right}
+#request_an_invitation {padding: 0.5em; float: right}
+#login_link img {background-color: #f6f6f6; -moz-border-radius: 0.25em; -webkit-border-radius: /25em; border-radius: 0.25em; margin-left: 1em}
+#login_text {position: relative; top: -0.25em}
+.go {padding:0.25em; background-color: #eee; -moz-border-radius: 0.5em; -webkit-border-radius: 0.5em; border-radius: 0.5em; vertical-align: middle}

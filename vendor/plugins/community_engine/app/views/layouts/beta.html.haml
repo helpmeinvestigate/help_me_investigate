@@ -1,0 +1,27 @@
+!!!
+%html
+%head
+  %link{:rel=>"shortcut icon", :href=>"/favicon.ico"}
+  %meta{"http-equiv"=>"Content-Type", :content=>"text/html;charset=utf-8"}
+  %meta{:name=>"verify-v1", :content=>"YJGTX+NUnjYKoOAGkCBsKWPwauQ8cBQ1FxGkpt1bMvU="}
+
+  %title
+    = AppConfig.community_name
+    |
+    = AppConfig.community_tagline
+  
+  = render :partial => "shared/scripts_and_styles"
+    
+  %body.beta
+    #doc2.yui-t6
+      = render :partial => "shared/header"
+            
+      #bd
+        = render :partial => "shared/messages"
+                
+        = @content_for_layout
+                            
+      #footer
+        = render :partial => "shared/footer"
+        
+    = render :partial => "shared/footer_scripts"

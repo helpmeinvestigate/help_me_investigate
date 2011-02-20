@@ -1,0 +1,85 @@
+
+
+- @section = "investigations"
+- @meta = { :description => "#{@investigation.question}", :keywords => "#{@investigation.tags.join(", ") unless @investigation.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+
+#yui-main
+  .yui-b
+  
+    %h1.entry-title= link_to @investigation.question, investigation_path(@investigation), :rel => 'bookmark'
+    %h3= :could_you_help.l + " " + link_to(@investigation.user.login, user_path(@investigation.user)) + " " + :investigate_this.l + "?"
+    
+    .description
+      = @investigation.description
+    
+    .box.hfeed
+      .hentry.main
+        .entry-title= link_to @investigation.question, investigation_path(@investigation), :rel => 'bookmark'
+        .vcard.author
+          %ul
+            %li.update
+              %a{"href"=>"#{investigation_path(@investigation)}", "rel"=>"bookmark"}
+                %abbr.published{"title"=>"#{@investigation.published_at}"}= @investigation.published_at_display("%B %d, %Y")
+            %li.view= :views.l+" (#{@investigation.view_count})"      
+            - if current_user and current_user.can_request_friendship_with(@investigation.user)
+              %li.addfriend= add_friend_link(@investigation.user)
+            %li.print
+              %a{"href"=>"#", :onclick=>"window.print(); return false;", :title=>:print_this_story.l}= :print.l
+            %li.email
+              %a{:href=>"#", :onclick=>"showSendTo_friend(); return false;", :title=>:email_this_story_to_friends.l}= :email_to_friends.l
+            %li.share
+              %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/widget/?tabs=web&amp;charset=utf-8&amp;style=default&amp;publisher=4488bdef-d776-4c80-93e1-ac1fb8359971&amp;linkfg=%23131358"}
+            -if @is_current_user || admin? || moderator?
+              %li.edit= link_to :edit.l, edit_investigation_path(@investigation.user, @investigation)
+              %li.delete= link_to :delete.l, investigation_path(@investigation.user, @investigation), {:method => :delete, :confirm => :permanently_delete_this_investigation.l}
+
+          - content_for :scripts do    
+              
+            %script{:type => 'text/javascript'}
+              :plain
+                function showSendTo_friend(){
+                  if ($('send_to_friend')){
+                    new Lightbox.base('send_to_friend');				                
+                  } else {
+              = remote_function(:url => { :action => "send_to_friend", :params => {:user_id => @investigation.user.id, :id => @investigation.id} }, :success => "new Insertion.Top($('bd'), request.responseText)", :complete => "new Lightbox.base('send_to_friend'); return false;Element.toggle('send_to_friend');", :method => 'investigation')                 
+              :plain
+                }}
+              
+        / vcard
+        .entry-content
+          /= render :partial => 'polls/poll_ui', :locals => {:poll => @investigation.polls.first} unless @investigation.polls.empty?
+          - unless @investigation.tags.empty?
+            %ul.tags
+              - @investigation.tags.each do |t|
+                %li=link_to( t.name, tag_url(t), :rel => 'tag')
+        / entry-content
+      / ends hentry
+  / yui-b
+/ ends yui-main
+
+.yui-b
+  =render :partial => 'posts/author_profile', :locals => {:user => @investigation.user}
+
+  - unless @related.empty?
+    .box.alt
+      %h3=:related_investigations.l
+      %ul.list.page
+        - @related.each do |investigation|
+          %li=link_to truncate(investigation.question, :length => 75), investigation_path( investigation)      
+
+  - unless @popular_investigations.empty?
+    .box.alt
+      %h3=:popular_investigations.l
+      %ul.list.page
+        - @popular_investigations.each do |investigation|
+          %li=link_to truncate(investigation.question, :length => 75), investigation_path(investigation)      
+/ sidebar
+
+- content_for :scripts do    
+
+  %script{:type=>"text/javascript", :charset=>"utf-8"}
+    = remote_function :url => {:controller => 'investigations', :action => 'update_views', :user_id => @investigation.user, :id => @investigation}, :method => :put
+
+  %script{"type"=>"text/javascript", "src"=>"http://www.plaxo.com/css/m/js/util.js"}
+  %script{"type"=>"text/javascript", "src"=>"http://www.plaxo.com/css/m/js/basic.js"}
+  %script{"type"=>"text/javascript", "src"=>"http://www.plaxo.com/css/m/js/abc_launcher.js"}

@@ -1,0 +1,9 @@
+- @section = "faq"
+
+.box
+  %h3#new_faq= "New FAQ"
+    
+  = error_messages_for :faq
+  - form_for :faq, :url=>faqs_path(), :html => {:class => "MainForm"} do |f|
+    = render :partial => "form", :object => f
+    %p= submit_tag :save_faq.l, :or => link_to(:cancel.l, faqs_path())

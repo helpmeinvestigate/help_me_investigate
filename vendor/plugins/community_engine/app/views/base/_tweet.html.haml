@@ -1,0 +1,5 @@
+%p.tweet
+  = auto_link(h(tweet.text))
+  %br
+  %span.when  
+    = link_to( distance_of_time_in_words(Time.now,Time.parse(tweet.created_at)), 'http://twitter.com/' + tweet.from_user + '/status/' + tweet.id.to_s)

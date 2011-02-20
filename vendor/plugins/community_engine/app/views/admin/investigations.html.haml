@@ -1,0 +1,50 @@
+- @section = "admin"
+- @subsection = "investigations"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+#yui-main
+  .yui-b.box
+    %h3
+      = :investigations.l
+
+    -if @investigations.page_count > 1
+      .pagination= paginating_links @investigations, :link_to_current_page => true
+
+    %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%"}
+      %tr
+        %th="Who"
+        %th=:investigation.l
+        %th &nbsp;
+        %th &nbsp;
+        %th &nbsp;
+        %th &nbsp;
+        
+      - @investigations.each do |investigation|
+        %tr{:id => "investigation_#{investigation.id}", :class => investigation.published_as}
+          %td
+            -if investigation.user
+              = link_to h(investigation.user.login), user_path(investigation.user)
+            -else
+              = link_to_unless(investigation.author_url.blank?, h(investigation.username), h(investigation.author_url)){ h(investigation.username) }              
+              %br
+              %small="(#{investigation.author_url})"
+          %td
+            ="#{link_to h(investigation.question), investigation_url(investigation)}"
+          %td
+          
+          %td
+            ="#{link_to 'Edit', edit_investigation_url(investigation)}"
+          %td
+            =link_to_remote("Trash".l, {:url => trash_investigation_path(investigation), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "investigation_#{investigation.id}"), :confirm => "Are you sure you want to put this investigation in the trash?"} )
+          %td
+            %div{:id => "moderate_investigation_#{investigation.id}"}
+              -if investigation.is_live?
+                =link_to_remote("Moderate".l, {:url => moderate_investigation_path(investigation), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "moderate_investigation_#{investigation.id}")})
+              -unless investigation.is_live?
+                =link_to_remote("Publish".l, {:url => publish_investigation_path(investigation), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "investigation_#{investigation.id}")})
+            
+            
+
+    -if @investigations.page_count > 1
+      .pagination= paginating_links @investigations, :link_to_current_page => true

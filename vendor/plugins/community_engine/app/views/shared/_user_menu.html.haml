@@ -1,0 +1,10 @@
+
+- if current_user
+  %span.FunctionNav
+    = link_to :messages.l, user_messages_path(current_user), :class=>"messages"
+
+= link_to :log_out.l, logout_path
+= :as.l
+= link_to current_user.login, dashboard_user_path(current_user)
+
+  

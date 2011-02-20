@@ -1,0 +1,24 @@
+if @comment.new_record?
+  page.select('div#comments div.errors').invoke('update', flash[:error])
+  page << "new Effect.Highlight($$('div#comments div.errors')[0]);"
+  page.select('#comment_spinner').invoke('hide')
+else
+  page.insert_html :after, 'insert_comment', :partial => 'comments/comment.html.haml', :locals => {:comment => @comment, :highlighted => true}  
+  page.select('#comment_spinner').invoke('hide')
+  page << "$$('#comment_comment')[0].clear(); $$('#comment_link')[0].value='http://';"
+  page << "scrollToNewestComment();"
+  if params[:completed]
+    page.select('#yui-main').invoke('addClassName','completed');
+    page.select('#yui-main').invoke('removeClassName','ongoing');
+  end
+  page << "new Effect.Highlight($$('div#comment_" + @comment.id.to_s + "')[0]);"
+  
+  page << remote_function(:update => "comment_link_#{@comment.id}", :url => shorten_comment_path(@comment.commentable_type, @comment.commentable_id, @comment), :method => :put)
+  # page << "Element.toggle('add_a_comment');"
+  #page.select('#emptycomments').invoke('hide')
+end
+
+
+#page << "if($('dynamic_recaptcha')){Recaptcha.create('#{AppConfig.recaptcha_pub_key}', $('dynamic_recaptcha') )}"  
+          
+

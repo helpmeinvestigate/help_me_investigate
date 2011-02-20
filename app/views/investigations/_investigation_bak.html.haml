@@ -1,0 +1,20 @@
+.hentry.investigation{:class=> investigation.css_classes(current_user)}
+
+  .left
+    %a{:href=>"#{investigation_path(investigation)}", :class=>"photo", :rel=>"bookmark"}
+      =image_tag((investigation.user.avatar_photo_url(:thumb)), :alt=>"", :width=>"50", :height=>"50") 
+
+  
+  .vcard.author
+    %strong 
+      Help 
+      = link_to investigation.user.login, user_path(investigation.user)
+      - if investigation.investigatings.size > 0
+        and
+        = pluralize investigation.investigatings.size, "other"
+
+      investigate
+      
+    
+  %h4.entry-title{:id=>"investigation_#{ investigation.id}"}
+    = link_to investigation.question, investigation_path(investigation), :rel => 'bookmark'

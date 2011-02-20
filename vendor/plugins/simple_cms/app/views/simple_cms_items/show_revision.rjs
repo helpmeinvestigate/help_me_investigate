@@ -1,0 +1,4 @@
+page.replace_html :version_id, params[:version]
+page.visual_effect :highlight, :revision_heading
+page.replace_html :save_revision_button, :partial => 'revision_button', :object => @cms_item_version.version
+page.show :save_revision_button

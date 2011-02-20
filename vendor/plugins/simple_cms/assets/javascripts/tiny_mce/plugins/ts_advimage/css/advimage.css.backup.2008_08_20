@@ -1,0 +1,103 @@
+/* CSS file for advimage plugin popup */
+
+div.image {
+  display: table-cell;
+  width: 60px;
+  height: 100px;
+  margin-bottom: 1px;
+}
+
+div.image img {
+  vertical-align: top;
+  margin: 5px;
+  margin-bottom: 1px;
+}
+
+div.controls {
+  display: none;
+  background-color: #A9A9A9;
+  width: 60px;
+  height: 30px;
+  margin-bottom: 1px;
+}
+
+a.controls {
+  background-color: #A9A9A9;
+  float: right;
+  margin-right: 5px;
+}
+
+a.controls img {
+  border: 0px;
+  background-color: #A9A9A9;
+}
+
+div.over_image {
+  border: 2px solid gray;
+  background-color: #A9A9A9;
+}
+
+.mceImageList {
+	width: 280px;
+}
+
+.mceActionPanel {
+	margin-top: 7px;
+}
+
+.alignPreview {
+	border: 1px solid black;
+	width: 140px;
+	height: 140px;
+	overflow: hidden;
+	padding: 5px;
+}
+
+.checkbox {
+	border: 0;
+}
+
+.panel_wrapper div.current {
+	height: 305px;
+}
+
+#prev {
+	margin: 0;
+	border: 1px
+	solid black;
+	width: 99%;
+	height: 150px;
+	overflow: auto;
+}
+
+#align, #classlist {
+	width: 150px;
+}
+
+#width, #height {
+	vertical-align: middle;
+	width: 50px;
+	text-align: center;
+}
+
+#vspace, #hspace, #border {
+	vertical-align: middle;
+	width: 30px;
+	text-align: center;
+}
+
+#classlist {
+	width: 180px;
+}
+
+input {
+	width: 280px;
+}
+
+#constrain, #onmousemovecheck {
+	width: auto;
+}
+
+#id, #dir, #lang, #usemap, #longdesc {
+	width: 200px;
+}

@@ -1,0 +1,32 @@
+- challenge = accept_or_quit_button
+- task = challenge.undertaking_for(current_user)
+/- debugger
+
+.right
+  
+  - unless task.blank?
+    
+    - if task.completed
+      
+      %h3.completed
+        Complete!
+    
+    - else
+      .button
+        = button_to("I have completed this challenge", investigation_challenge_task_path( challenge.investigation, challenge.id, task.id), :method=>:put)
+
+        
+      .right
+        or
+        = link_to("Quit this challenge", investigation_challenge_task_path( challenge.investigation, challenge.id, task.id), :method=>:delete)
+        
+
+             
+      
+  - else
+    - unless challenge.completed
+      .button
+        = button_to("Accept this challenge", investigation_challenge_tasks_path(challenge.investigation, challenge))
+    - else
+      %h3.completed
+        Complete!

@@ -1,0 +1,44 @@
+
+        
+      
+
+.yui-gc#investigation_top
+  .yui-u.first
+  
+
+    %h1.box= link_to @investigation.question, investigation_path(@investigation), :rel => 'bookmark'
+    - if((@is_current_user || admin? || moderator?) && @investigation.description.blank?)
+      %p=link_to "Add a description", edit_investigation_path(@investigation)
+
+    = clean @investigation.description unless @investigation.description.blank?
+  .yui-u
+    .investigation-notices
+      - if @investigation.locked
+        #locked_notice
+          Locked by the moderator.
+      - else
+        - if current_user
+          .button.right
+            - @investigating = @investigation.investigating_by(current_user)
+            - if @investigation.is_being_investigated_by(current_user) && !@investigating.blank?
+              = link_to(:quit_this_investigation.l, investigation_investigating_path(@investigation, @investigation.investigating_by(current_user)), :method=>:delete)
+            - if not @investigation.is_being_investigated_by(current_user)
+              = button_to(:join_this_investigation.l, investigation_investigatings_path(@investigation))
+        
+
+      - if @investigation.completed
+        #completed_notice
+          Complete!
+          
+      - if @investigation.featured
+        /#featured_notice
+        /  Featured
+
+      - if @investigation.is_moderate?
+        #moderated_notice
+          Flagged for moderation
+      
+      - if @investigation.is_draft?
+        #draft_notice
+          Awaiting approval
+      

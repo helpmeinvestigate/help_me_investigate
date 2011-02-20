@@ -1,0 +1,56 @@
+
+-unless AppConfig.closed_beta_mode
+  .yui-b.sidebar=render :partial => 'shared/login_sidebar'
+  
+#welcome
+
+  .yui-g.box
+
+    .yui-u.first
+      #request_an_invitation
+
+        %h2
+          We are in Private Beta mode.
+
+        %p
+          That's Internet fancy-talk for 
+          %em
+            &#147;we are testing the site with a specially invited group of people who are generously testing the site out with us while we build it.&#148;
+
+        %h2
+          Interested in helping us build Help Me Investigate?
+          %br
+          = link_to "Request an invitation", request_invitation_path
+
+
+    .yui-u
+      #login
+        %h2
+          Log in
+        - form_tag sessions_path, :class => "MainForm" do
+          %label{"for"=>"username"}
+            %h3=:username.l
+          = text_field_tag 'login', nil, :size => 35
+          
+          %label{"for"=>"password"} 
+            %h3=:password.l
+
+          = password_field_tag 'password', nil, :size => 35
+
+          %fieldset
+            %label{"for"=>"remember_me"} 
+              =:remember_me.l
+              = check_box_tag 'remember_me'
+
+          = hidden_field_tag :return_to, session[:return_to]
+          %p= submit_tag :log_in.l
+          
+        %h2.top
+          Trouble logging in?
+        %ul
+          %li
+            = link_to "I've forgotten my username", forgot_username_path
+          %li
+            = link_to "I've forgotten my password", forgot_password_path 
+          %li
+            = link_to "I haven't received my activation email", resend_activation_path

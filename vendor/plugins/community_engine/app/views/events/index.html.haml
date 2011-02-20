@@ -1,0 +1,29 @@
+- @section = 'events'
+
+.yui-b
+  - if @is_admin_user
+    .box.alt.first_alt
+      = link_to :post_an_event.l, new_event_path
+
+  .box
+    %h3= :events.l
+    = :find_out_where_to_be_and_when_to_be_there.l
+
+#yui-main
+  .yui-b
+    .box
+    
+      .pagination=paginating_links @events if @events.page_count > 1      
+
+      - @events.each do |event|
+        %h3= event.name
+        - if (logged_in? && event.user.eql?(current_user))
+          = link_to :edit_this_event.l, edit_event_path(event)
+          |
+          = link_to(:delete_this_event.l, event_path(event), {:method => :delete, :confirm => :permanently_delete_this_event.l})
+        %strong= h event.time_and_date
+        %br
+        %strong= h event.location
+        %p= event.description
+
+      .pagination=paginating_links @events if @events.page_count > 1      

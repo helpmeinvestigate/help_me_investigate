@@ -1,0 +1,9 @@
+#SubNavBar
+  %ul
+    = subnav_tab "Incomplete", { :url => challenges_path, :subsection => 'incomplete' }
+    = subnav_tab :all.l, { :url => all_challenges_path, :subsection => 'all' }
+    = subnav_tab :completed.l, { :url => completed_challenges_path, :subsection => 'completed' }
+    = subnav_tab :featured.l, { :url => featured_challenges_path, :subsection => 'featured' }
+    = subnav_tab :popular.l, { :url => popular_challenges_path, :subsection => 'popular' }
+    /= subnav_tab :nearby.l, { :url => nearby_challenges_path, :subsection => 'nearby' }
+  .clear

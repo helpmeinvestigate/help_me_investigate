@@ -1,0 +1,6 @@
+.box
+  %h3
+    Frequently Asked Questions
+  &laquo; 
+  = link_to "Back to all FAQs", faqs_path
+= render :partial => 'faqs/faq', :locals=> {:faq => @faq}

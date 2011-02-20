@@ -1,0 +1,35 @@
+- @section = 'my_profile'
+- @section = @user.eql?(current_user) ? 'my_profile' : 'users'
+- @subsection = 'dashboard'
+- @sidebar_left = true
+- content_for :sub_nav do
+  =render :partial => "subnav"    
+
+  
+#yui-main
+  .yui-b
+    .box
+      %h3= random_greeting(@user)
+    
+      -if @user.pending_friendships.any? && 1==0
+        %p=link_to "#{image_tag 'icons/user_add.png', :plugin => 'community_engine'} "+:you_have_pending_friendship_requests.l, pending_user_friendships_path(@user)
+    
+    
+      -if @recent_activity.empty? && @recommended_investigations.empty?
+          
+        %p
+          =link_to :update_profile_and_tag_yourself.l, edit_user_path(current_user)
+          =:to_get_recommended_content_on_your_dashboard.l
+
+    
+      -unless @recent_activity.empty?
+        .activity
+          %h2=:recent_activity.l
+          .box.fresh
+            =render :partial => "activities/activity", :collection => @recent_activity
+            %h6.all= link_to :see_all_activity.l, network_user_activities_path(current_user)
+
+      -unless @recommended_investigations.empty?
+        .investigations
+          %h2=:recommended_investigations.l
+          = render :partial => "investigations/investigation", :collection => @recommended_investigations

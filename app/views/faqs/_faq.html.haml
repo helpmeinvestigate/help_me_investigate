@@ -1,0 +1,8 @@
+.box.faq  
+  %h3.faq_question
+    %a{:id=>"faq_" + faq.id.to_s, :name=>"faq_" + faq.id.to_s, :href=>faq_path(faq)}
+      = faq.question
+  .faq_answer
+    = faq.answer
+  -if admin?
+    = link_to :edit.l, edit_faq_path(faq)

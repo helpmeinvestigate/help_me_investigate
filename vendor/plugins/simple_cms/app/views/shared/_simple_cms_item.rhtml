@@ -1,0 +1,17 @@
+<% -%>
+<div class="content_item <%= "simple_cms_item_admin" if admin? %>"
+    <%= "onmouseover=\"show_simple_cms_controls($(this))\"" if admin?%>
+    <%= "onmouseout=\"hide_simple_cms_controls($(this))\"" if admin? %>>
+  <% if admin? and simple_cms_item.data.blank? -%>
+    <b style="cursor: pointer;" <%= "onclick=\"edit_simple_cms_item(#{simple_cms_item.id},'#{@prefix}')\"" %>>Click to add content here.</b>
+  <% else -%>
+    <div class="controls">
+      <% if @cms_admin -%>
+        <b <%= "onclick=\"edit_simple_cms_item(#{simple_cms_item.id},'#{@prefix}')\"" %>>Edit</b>
+      <% end -%>
+    </div>
+    <% if !(simple_cms_item.data.nil? and !admin?) -%>
+      <%= RedCloth.new(simple_cms_item.data).to_html %>
+    <% end -%>
+  <% end -%>
+</div>

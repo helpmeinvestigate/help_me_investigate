@@ -1,0 +1,2 @@
+class InvestigationwizardController < ApplicationController
+end

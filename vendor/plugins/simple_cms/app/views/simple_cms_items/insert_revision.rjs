@@ -1,0 +1,1 @@
+window.opener.replace_html 'revision_rows', :partial => 'revision', :collection => @versions

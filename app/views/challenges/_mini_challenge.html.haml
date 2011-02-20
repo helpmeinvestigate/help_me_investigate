@@ -1,0 +1,15 @@
+- challenge = mini_challenge
+
+- unless challenge.blank?
+
+  - unless challenge.investigation.blank?
+    .challenge{:class=> challenge.css_classes(current_user)}
+
+      %h3=link_to challenge.title, investigation_challenge_path(challenge.investigation,challenge)
+
+      - if @investigation.blank?
+        .which_investigation.box
+          to help investigate
+          = link_to challenge.investigation.question, investigation_path(challenge.investigation)
+
+

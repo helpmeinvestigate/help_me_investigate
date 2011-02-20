@@ -1,0 +1,13 @@
+#SubNavBar
+  %ul
+    = subnav_tab :start_an_investigation.l, { :url => new_investigation_path, :subsection => 'new', :class=>'menu_button' }
+    = subnav_tab :all.l, { :url => investigations_path, :subsection => 'all' }
+    - if logged_in?
+      = subnav_tab "Mine", { :url => mine_investigations_path, :subsection => 'mine' }
+    = subnav_tab "Recent", { :url => recent_investigations_path, :subsection => 'recent' }
+    = subnav_tab :featured.l, { :url => featured_investigations_path, :subsection => 'featured' }
+    = subnav_tab :popular.l, { :url => popular_investigations_path, :subsection => 'popular' }
+    = subnav_tab :tags.l, { :url => tags_path, :subsection => 'tags' }
+    = subnav_tab :completed.l, { :url => completed_investigations_path, :subsection => 'completed' }
+    /= subnav_tab :nearby.l, { :url => nearby_investigations_path, :subsection => 'nearby' }
+  .clear

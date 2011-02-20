@@ -1,0 +1,12 @@
+.box
+  %h2
+    Frame the blank as a question:
+ 
+  %h3
+    = form.select( :blank_type, { "What" => "What", "Who" => "Who", "When" => "When", "Where" => "Where", "How much" => "How much", "How many" => "How many"})
+
+    = form.text_field :after_text, :class => "primary", :value => "( is the thing you want to know )", :size => 30, :onfocus => "clr(this);"
+    ?
+- content_for :scripts do    
+  = javascript_tag "function clr(el) { if (el.defaultValue==el.value) el.value = ''; }"
+    

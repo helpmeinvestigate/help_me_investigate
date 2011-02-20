@@ -1,0 +1,12 @@
+- @section = "challenges"
+- @subsection = "new"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+.box
+  %h3#new_challenge= :new_challenge.l
+    
+  = error_messages_for :challenge
+  - form_for :challenge, :url=>investigation_challenges_path(@investigation), :html => {:class => "MainForm"} do |f|
+    = render :partial => "form", :object => f
+    %p= submit_tag :post_challenge.l, :or => link_to(:cancel.l, investigation_path(@investigation))

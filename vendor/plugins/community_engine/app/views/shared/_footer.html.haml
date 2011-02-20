@@ -1,0 +1,65 @@
+
+.yui-g          
+  .yui-g.first
+    .yui-u.first.box
+    
+      %h3="About"
+      %ul.about
+        %li
+          %a{:href=>"/about", :title=>:what_is.l + " #{AppConfig.community_name}?"}
+            ="About this site"
+        %li
+          = link_to "The team", team_path
+        %li
+          = link_to "Blog", "http://blog.helpmeinvestigate.com"
+        %li
+          = link_to "Contact", contact_path
+        %li
+          = link_to "Credits", credits_path  
+
+    .yui-u.box
+      %h3="Help"
+      %ul
+        %li
+          %a{:href=>"/faqs", :title=>:frequent_asked_questions.l}
+            =:faq.l
+        %li
+          %a{:href=>"http://hmi.uservoice.com/pages/general", :title=>:feedback.l}
+            =:feedback.l
+      
+        %li
+          %a{:href=>"/community-guidelines", :title=>:community_guidelines.l}
+            =:community_guidelines.l
+        %li
+          %a{:href=>"/investigation-guidelines", :title=>:investigation_guidelines.l}
+            =:investigation_guidelines.l
+        %li
+          %a{:href=>"/ethics", :title=>:ethical_guidelines.l}
+            =:ethical_guidelines.l
+    
+  .yui-g
+    .yui-u.first.box
+      %h3="More info"
+      %ul
+        %li
+          %a{:href=>"/terms", :title=>:terms_and_conditions.l}
+            =:terms_and_conditions.l 
+        %li
+          %a{:href=>"/privacy", :title=>"Privacy statement"}
+            Privacy statement
+        %li
+          %li= link_to "Browse people", users_path
+
+
+    .yui-u.box
+      - unless current_user.blank?
+        %h3="My account"
+        %ul.my_account
+          %li= link_to "My page", user_path(current_user)
+          %li= link_to :edit_profile.l, edit_user_path(current_user) 
+          %li= link_to :edit_account.l, edit_account_user_path(current_user)      
+  /- if @rss_title && @rss_url
+  /  %li#rss= link_to :rss.l, @rss_url, {:title => @rss_title}
+    
+%p
+  &nbsp;

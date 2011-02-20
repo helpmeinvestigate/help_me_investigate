@@ -1,0 +1,20 @@
+- @section = "investigations"
+- @subsection = "recent"
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+#yui-main
+
+  .yui-b
+    
+
+      
+    .box.investigations.hfeed
+      %h2
+        Recent investigations
+      = render :partial => 'investigation', :collection => @investigations
+
+      .pagination=paginating_links @investigations if @investigations.page_count > 1
+.yui-b
+  = render :partial => "find_investigations_right"

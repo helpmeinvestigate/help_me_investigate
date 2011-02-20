@@ -1,0 +1,86 @@
+.yui-b#investigation_right
+
+  .box.investigators
+    %h3.started_by.box
+      
+      %a.left{:href=>"#{user_path(@investigation.user)}",  :class=>"photo", :rel=>"bookmark"}
+        =image_tag((@investigation.user.avatar_photo_url(:thumb)), :alt=>@investigation.user.login, :width=>"50", :height=>"50")
+      Started by
+      %br
+      = link_to(@investigation.user.login, user_path(@investigation.user)) 
+
+    - unless @investigation.investigators_not_counting_creator.empty?
+      .joined_by.box
+        %h3
+          People investigating this:
+
+        = render :partial => 'investigatings/investigating', :collection => @investigation.investigators_not_counting_creator
+        
+        .clear
+        
+    - if logged_in?
+      %p.button.invite_people
+        = link_to "Invite people", new_user_invitation_path(current_user, :investigation_id => @investigation.id), {:method=> :get}
+      
+    - unless @investigation.investigators_not_counting_creator.empty?
+    
+      /%h3.investigator_tags.box
+      /  Expertise in this team
+      /- context_tag_cloud @investigation.investigator_tags, %w(nube1 nube2 nube3 nube4 nube5) do |name, css_class|
+      /  = link_to name, tag_url(URI::encode(name, /[\/.?#]/)), :class => css_class
+      
+    .clear
+    
+
+      
+  .box
+  
+    %h3
+      .left
+        = :tags.l 
+      
+        - if @is_current_user || admin? || moderator?
+          (
+          =link_to "Edit", edit_investigation_path(@investigation)
+          )
+    
+      .left
+        = help_tooltip('user_tags_etc')
+        
+    %ul.tags.list.clear.box
+      - @investigation.tags.each do |t|
+        %li.tag=link_to( t.name, tag_url(t), :rel => 'tag')  
+      
+
+
+  
+  -if @is_current_user || admin? || moderator?
+    .box.alt
+      %h3=:administer_this_investigation.l
+      %ul.list.admin
+        %li.edit= link_to :edit.l, edit_investigation_path(@investigation)
+        %li.trash= link_to :trash.l, trash_investigation_path(@investigation), {:method => :post, :confirm => :send_this_investigation_to_the_trash.l}
+        -if admin? || moderator?
+          %li.delete= link_to :delete.l, investigation_path(@investigation), {:method => :delete, :confirm => :permanently_delete_this_investigation.l}
+          -if @investigation.locked
+            %li.unlock= link_to :unlock.l, unlock_investigation_path(@investigation), {:method => :post}
+          -else
+            %li.lock= link_to :lock.l, lock_investigation_path(@investigation), {:method => :post}
+        
+          -if @investigation.completed
+            %li.uncomplete= link_to :uncomplete.l, uncomplete_investigation_path(@investigation), {:method => :post}
+          -else
+            %li.complete= link_to :complete.l, complete_investigation_path(@investigation), {:method => :post}
+
+          -if @investigation.featured
+            %li.unfeature= link_to :unfeature.l, unfeature_investigation_path(@investigation), {:method => :post}
+          -else
+            %li.feature= link_to :feature.l, feature_investigation_path(@investigation), {:method => :post}
+              
+  - if logged_in?
+    .button.request_moderation
+      = button_to "Request moderation".l, moderate_investigation_path(@investigation), {:method=> :post, :confirm => "Are you sure you want to request moderation? The investigation will no longer be public awaiting input from the moderator."}
+
+
+/%script{:type=>"text/javascript", :charset=>"utf-8"}
+/  = remote_function :url => {:controller => 'investigations', :action => 'update_views', :user_id => @investigation.user, :id => @investigation}, :method => :put

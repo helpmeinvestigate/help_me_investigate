@@ -1,0 +1,130 @@
+#hd
+  .yui-gd
+    .yui-u.first.nologo
+      %h1
+        %a{:href=>"/", :title=>"#{AppConfig.community_name}"}
+          = image_tag 'help-me-investigate.png', :alt=>"Help Me Investigate"
+    .yui-u
+      #UserMenu
+      
+        - if logged_in?
+          = render :partial => 'shared/user_menu'
+        - else
+          #login_link
+            = link_to :log_in.l, login_path, :id=>'login_text'
+            = link_to(image_tag('icons/allicons/bullet_arrow_down.png'), '#', :id=>'login_pop')
+          
+          #request_an_invitation
+            = link_to "Request an invitation", request_invitation_path, :class=>'quiet'
+          
+          #hidden_login_box
+            #login_content
+              - form_tag sessions_path, :class => "MainForm" do
+                %label{"for"=>"username"}
+                  %h3=:username.l
+                = text_field_tag 'login', nil, :size => 21, :class=>'login_username'
+
+                %label{"for"=>"password"} 
+                  %h3=:password.l
+
+                = password_field_tag 'password', nil, :size => 21
+
+                %fieldset
+                  %label{"for"=>"remember_me"} 
+                    =:remember_me.l
+                    = check_box_tag 'remember_me'
+
+                = hidden_field_tag :return_to, request.request_uri
+                %p.log_in_or_trouble
+                  = submit_tag :log_in.l 
+                  = link_to 'Trouble logging in?', login_path
+
+          
+          - content_for :scripts do
+
+            :javascript
+              document.observe('dom:loaded', function() {
+                  
+                  new Tip($('login_pop'), $('login_content').cloneNode(true),
+                    {
+                      offset: { x: 10, y: 0 },
+                      hook: { tip: 'topRight', target: 'bottomMiddle' },
+                      stem: 'topRight',
+                      title: 'Log in',
+                      effect: 'blind',
+                      closeButton: true,
+                      hideOn: { element: '.close', event: 'click'},
+                      showOn: 'click',
+                      width: 240
+                    }
+                  );
+              });
+              
+              $('login_pop').observe('prototip:shown', function() {
+              
+                $('.prototip .login_username').focus();
+              });
+          
+          
+      
+     
+      - if logged_in? 
+        #search.right
+          %form{:method=>"get", :action=>"/search", :target=>"_top"}
+            %label{ :for=>"q",  :style=>"display: none"}
+              = :search.l+" #{AppConfig.community_name}"
+            %input{ :type=>"text",:name=>"q", :size=>"17", :maxlength=>"255", :id=>"search"}
+            
+      - if logged_in?
+        - @my_investigatings = Investigating.find(:all, :conditions=>['investigatings.user_id = ?', current_user.id], :order=>'investigations.question', :include=> :investigation)
+        
+        - @my_investigations = @my_investigatings.collect{|x| x.investigation}
+        - unless @investigation.blank?
+          - selected = @investigation.id.to_i
+        - else
+          - selected = ''
+      - else
+        - @my_investigations = Investigation.find(:all, :limit=>10, :include => :investigatings, :order=>'investigations.created_at desc')
+
+      - unless @my_investigations.blank?
+        #MyInvestigations
+          - form_tag("/investigations/", :method => :get)  do
+            /= collection_select(:investigation, :id, my_investigations(current_user), :id, :question, {:onchange=>"document.location.href='/investigations/'+ $('slug').value;"}) 
+            = select_tag 'id', options_for_select( @my_investigations.collect {|p| [ p.question, p.id ] }, :selected=>selected), {:onchange=>"document.location.href='/investigations/'+ $('id').value;"}
+            
+            = image_submit_tag 'icons/allicons/bullet_go.png', :class=>"go"
+        
+
+            
+  #NavBar
+    %ul
+      %li.motto
+        Connect. Mobilise. Uncover.
+        
+      - unless(@section == 'home')
+        = topnav_tab :home.l, { :url => "/", :section => 'home' }
+
+    
+      
+      = topnav_tab :investigations.l, { :url => investigations_path, :section => 'investigations' }  
+    
+      - Category.find(:all).each do |c|
+        = topnav_tab c.name, {:url => category_path(c), :section => c.name}
+      
+      /= topnav_tab :start_one.l, { :url => new_investigation_path, :section => 'new_investigation' }
+      /- if logged_in? 
+      /  = topnav_tab :challenges.l, { :url => challenges_path, :section => 'challenges' }
+
+
+      - if current_user 
+        /= topnav_tab :invite.l, { :url => invite_user_path(current_user), :section => 'invite' }
+        = topnav_tab :me.l, { :url => user_path(current_user), :section => 'my_profile'}   
+    
+        -if current_user.admin?
+          = topnav_tab :admin.l, { :url => admin_path, :section => 'admin'}
+      
+
+
+  / NavBar 
+  = yield :sub_nav 
+  / header

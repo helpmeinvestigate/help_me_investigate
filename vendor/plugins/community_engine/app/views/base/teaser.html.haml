@@ -1,0 +1,95 @@
+- @section = "home"
+
+#welcome
+  .box
+    %h2
+      A place where you can collaborate with other people to investigate things
+    %h2
+      %ol
+        %li
+          Start an investigation
+        %li
+          Invite other people to help you investigate it
+        %li
+          Collaborate and share answers
+
+        
+.yui-g.box
+
+  .yui-u.first
+    #join_an_investigation.box
+      %h2
+        Help someone investigate:
+
+      - @featured.each do |feature|
+        .feature.clear
+          = render :partial => 'investigations/feature', :locals => {:investigation => feature}
+    
+      %h2.clear
+        = link_to "Browse all investigations", investigations_path          
+      
+
+
+  .yui-u
+    #start_an_investigation.box
+      %h2
+        Log in
+      - form_tag sessions_path, :class => "MainForm" do
+        %label{"for"=>"username"}
+          %h3=:username.l
+        = text_field_tag 'login', nil, :size => 35
+
+        %label{"for"=>"password"} 
+          %h3=:password.l
+
+        = password_field_tag 'password', nil, :size => 35
+
+        %fieldset
+          %label{"for"=>"remember_me"} 
+            =:remember_me.l
+            = check_box_tag 'remember_me'
+        .right    
+          %h2.top
+            Trouble logging in?
+          %ul
+            %li
+              = link_to "I've forgotten my username", forgot_username_path
+            %li
+              = link_to "I've forgotten my password", forgot_password_path 
+            %li
+              = link_to "I haven't received my activation email", resend_activation_path
+
+        %p= submit_tag :log_in.l
+        
+        
+
+
+#buzz.box
+  .yui-gb
+    .yui-u.first
+      .quote
+        %q
+          I think it's great that I can help create a sliver of mischief in a greater project of finding the truth on a subject.
+        .by
+          = link_to 'Joanna Geary', "http://twitter.com/timesjoanna"
+      
+    .yui-u
+      .quote
+        %q{:cite=>"http://www.guardian.co.uk/media/organgrinder/audio/2009/jul/31/podcast-bbc-video-sharing-itn-microsoft"}
+          Is this the future for local reporting? 
+        .by
+          = link_to 'Matt Wells - Guardian Media Talk', "http://www.guardian.co.uk/media/organgrinder/audio/2009/jul/31/podcast-bbc-video-sharing-itn-microsoft"
+    
+    .yui-u
+      .quote
+        %q{:cite=>"http://www.journalism.co.uk/5/articles/535469.php"}
+          you're becoming part of an investigative team that's bigger, more diverse and more skilled than any newsroom could ever be
+        .by
+          = link_to 'Tom Scotney - Journalism.co.uk', "http://www.journalism.co.uk/5/articles/535469.php"
+        
+.yui-gb.box
+  .yui-u.first
+    
+  .yui-u
+    
+  .yui-u

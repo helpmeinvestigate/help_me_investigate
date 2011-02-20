@@ -1,0 +1,18 @@
+- @section = "challenges"
+- @subsection = "incomplete"
+
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+#yui-main
+  .yui-b
+    .challenges.box
+  
+      %h2 
+        Accept a challenge to help progress an investigation 
+
+      = render :partial => 'challenges/challenge', :collection => @challenges
+
+      .button
+        = button_to "Set a new challenge", new_challenge_path(@investigation), :method=>:get

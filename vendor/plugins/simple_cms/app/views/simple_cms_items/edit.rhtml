@@ -1,0 +1,25 @@
+<% %>
+<% form_for :simple_cms_item, :action => 'edit', :id => params[:id], 
+                   :html => { :id => 'data_form' } do |@f| %>
+<%= render :partial => 'form' %>
+<% end %>
+<div id="save_revision_button" style="display:none;">
+</div>
+<br />
+<div id="show_link" style="display: all">
+  <%= link_to_function "Show All Revisions", "$('show_link').hide();
+                       $('hide_link').show()" %>
+</div>
+
+<div id="hide_link" style="display: none">
+  <%= link_to_function "Hide Revisions", "$('show_link').show(); $('hide_link').hide();" %>
+  <table border="1" id="revisions_table">
+    <tr>
+      <th>Revision #</th>
+      <th>Last Updated</th>
+    </tr>
+    <div id="revision_rows">
+      <%= render :partial => 'revision', :collection => @versions.reverse %>
+    </div>
+  </table>
+</div>

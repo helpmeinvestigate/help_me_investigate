@@ -1,0 +1,11 @@
+<% -%>
+<html>
+	<head>
+		<%= stylesheet_link_tag "simple_cms", "coderay" %>
+    <%= javascript_include_tag :defaults, "simple_cms" %>
+    <%= javascript_include_tag "tiny_mce/tiny_mce", "tiny_mce_init" %>
+	</head>
+	<body>
+		<%= yield %>
+	</body>
+</html>

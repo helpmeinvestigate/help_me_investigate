@@ -1,0 +1,16 @@
+.box.alt.first_alt
+  = link_to( "&raquo; #{:back_to_all_users.l}", users_path) if params['login'] || params['tag_list']
+  - form_tag users_path, :method => :get , :class => 'MainForm' do
+    %label= :user_login.l+":"
+    = text_field_tag 'login', @search['login']
+    %p
+      /= render :partial => 'shared/location_chooser', :locals => {:selected_country => @search['country_id'].to_i, :selected_state => @search['state_id'].to_i, :selected_metro_area => @search['metro_area_id'].to_i, :states => @states, :metro_areas => @metro_areas}
+
+    %p 
+      %input{"type"=>"submit", "value"=>:search_users.l}
+
+
+/- if current_user
+/  .box.alt
+/    %h3= :share_the_love.l
+/    = link_to :invite_your_friends_to_join.l, invite_user_path(current_user)

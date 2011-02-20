@@ -1,0 +1,11 @@
+- challenge = quit_button
+- task = challenge.undertaking_for(current_user)
+/- debugger
+
+  
+- unless task.blank?
+
+  .right
+  
+    .button
+      = button_to("Quit this challenge", investigation_challenge_task_path( challenge.investigation, challenge.id, task.id), :method=>:delete)

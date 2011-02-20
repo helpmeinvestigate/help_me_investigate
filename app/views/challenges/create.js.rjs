@@ -1,0 +1,15 @@
+if @challenge.new_record?
+  page.select('div#new_challenge div.errors').invoke('update', flash[:error])
+  page << "new Effect.Highlight($$('div#new_challenge div.errors')[0]);"
+else
+  page.insert_html :before, 'newest_challenge', :partial => 'challenges/challenge.html.haml', :locals => {:challenge => @challenge, :highlighted => true}  
+  page << "$$('#challenge_title')[0].clear(); $$('#challenge_description')[0].clear(); $$('#challenge_url')[
+0].clear(); $$('#challenge_url_description')[0].clear(); "
+  page << "Element.toggle('new_challenge'); scrollToNewestChallenge();"
+  page.select('#emptychallenges').invoke('hide')
+end
+
+page.select('#challenge_spinner').invoke('hide')
+#page << "if($('dynamic_recaptcha')){Recaptcha.create('#{AppConfig.recaptcha_pub_key}', $('dynamic_recaptcha') )}"  
+          
+

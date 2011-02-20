@@ -1,0 +1,5 @@
+<%= render :partial => "shared/simple_cms_item", :object => @simple_cms_item %>
+
+<% if logged_in? && admin? -%>
+    <a href="/simple_cms_items/edit/<%= @simple_cms_item.id %>">Edit</a>
+<% end -%>

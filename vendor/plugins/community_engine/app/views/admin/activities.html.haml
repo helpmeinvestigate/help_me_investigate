@@ -1,0 +1,10 @@
+- @section = "admin"
+- @subsection = "activity"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+#yui-main
+  .yui-b.box.fresh
+    %h3="Activity"
+    =render :partial => "activities/activity", :collection => @activities
+    .pagination=paginating_links @activities if @activities.page_count > 1      

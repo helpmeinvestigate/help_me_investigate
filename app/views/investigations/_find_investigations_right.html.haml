@@ -1,0 +1,15 @@
+.box.new_investigation
+  .button
+    = button_to :new_investigation.l, new_investigation_path, :rel => 'bookmark', :method => 'get'
+
+.box
+  %h2
+    .left
+      Tags
+    .left
+      = help_tooltip('user_tags_etc')
+  .clear  
+  
+  .tag_cloud  
+    - tag_cloud Investigation.popular_tags(100, ' count DESC'), %w(nube1 nube2 nube3 nube4 nube5) do |name, css_class|
+      = link_to name, tag_url(URI::encode(name, /[\/.?#]/)), :class => css_class, :rel=>'tag'

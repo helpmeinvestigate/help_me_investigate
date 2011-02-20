@@ -1,0 +1,8 @@
+#question.box
+  %label{"for"=>"question"}= :question.l
+  = form.text_field :question, :class => "primary"
+  
+#answer
+  %label{"for"=>"answer"}= :answer.l
+
+  = form.text_area :answer, :class => "primary"

@@ -1,0 +1,263 @@
+- content_for :scripts do
+
+  :javascript
+    document.observe('dom:loaded', function() {
+      $$('.challenge_link').each(function(element) {
+        new Tip(element, element.up('.challenge').down('.description').cloneNode(true),
+          {
+            offset: { x: -20, y: 0 },
+            hook: { tip: 'leftTop', target: 'rightBottom' },
+            target: element,
+            stem: 'leftTop',
+            hideAfter: 2,
+            hideOthers: true,
+            hideOn: false,
+            closeButton: true,
+            width: 340
+          }
+        );
+      });
+    });
+  
+- @section = "investigations"
+- @subsection = "all"
+- @meta = { :description => "#{@investigation.question}", :keywords => "#{@investigation.tags.join(", ") unless @investigation.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+- unless admin?  
+  - if @investigation.user == current_user && ( @investigation.invitations.size == 0 || @investigation.investigatings.size < 2 )
+    = render :partial => "start_an_investigation", :locals=>{:step => 2}
+
+#yui-main.full_investigation{:class=> @investigation.css_classes(current_user)}
+  .yui-b
+  
+    - if(admin? || moderator?)
+      #admin
+        -unless @investigation.is_live?
+          %div{:id => "publish_investigation_#{@investigation.id}", :class=>"admin_notice"}
+            %h3.box
+
+              - if @investigation.is_moderate?
+                Moderation has been requested on this investigation and it is not live
+
+              - if @investigation.is_draft?
+                This is a new investigation awaiting approval and is not live
+            %h3
+              =link_to_remote("Publish this investigation", {:url => publish_investigation_path(@investigation), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "publish_investigation_#{@investigation.id}")})
+              |
+              =link_to "Edit it", edit_investigation_path(@investigation)
+              |
+              = link_to('Message the author', '/' + current_user.login + '/messages/new?message[to]=' + @investigation.user.login)
+  
+  
+    #right_speech
+      .speech_background
+        .speech_icon
+          = image_tag 'right_speech_14.gif'
+
+    #investigation-title
+    
+      = render :partial => 'investigation_top'
+        
+      -if @investigation.allows_contributions_from?(current_user) || admin?
+
+        #recent_investigation_activity.box
+          %h2
+            What's happened recently
+            = image_tag spark_investigation_url(@investigation)
+          .fresh
+            =render :partial => "activities/activity", :collection => @investigation.activities.recent.first(4)
+          - if @investigation.activities.recent.size > 4
+            #older_items.fresh.hide
+              =render :partial => "activities/activity", :collection => @investigation.activities.recent.values_at(4..10)
+            .more_link
+              = link_to_remote("Display more...", :after => "Element.toggle('older_items')")
+              |
+              = link_to "All activity", investigation_activities_path(@investigation)
+      
+      - unless logged_in?
+    
+        #only_investigators.box
+          %h3
+            If you would like to follow or help with this investigation please 
+            = link_to("log in", login_path)
+            or
+            = link_to("sign up", signup_path)
+
+      - else
+
+        - unless @investigation.allows_viewing_by?(current_user)   || admin?
+
+          #only_investigators.box
+            %h3
+              If you would like to follow or help with this investigation please 
+              = link_to("join in", investigation_investigatings_path(@investigation), :method=>"post")  
+          
+        - else
+          /= render :partial => 'fill_in_the_blanks'
+      
+
+            
+          #take_a_challenge.box.top
+      
+            .yui-gc
+              .yui-u.first
+                - if @investigation.incomplete_challenges.size > 0
+                  %h2.left
+                    Help by completing challenges
+          
+                - else
+                  %h2
+                    Is there something you need help with? 
+                    %br
+                    .light
+                      Propose a task for other investigators to do
+              .yui-u
+        
+                - if @investigation.allows_contributions_from?(current_user) || admin?
+          
+                  %p.button.set_a_challenge
+                    /= button_to "Set a challenge", new_investigation_challenge_path(@investigation), :method => "get"
+                    = link_to_remote("Set a challenge", :after => "Element.toggle('new_challenge')")
+            
+          
+              #new_challenge.hide.clear
+          
+                - content_for :scripts do    
+              
+                  %script{:type=>"text/javascript"} 
+                    :plain
+                      function scrollToNewestChallenge(){
+                        loc = document.location.toString();
+                        if (loc.indexOf("#") != -1){
+                          parts = loc.split('#')
+                          loc = parts[0] + "#inserted_challenge"
+                        } else {
+                          loc = loc + "#inserted_challenge";
+                        }
+                        document.location.href = loc;
+                      }
+                  
+                .errors
+                - form_remote_for(:challenge, :loading => "$$('div#new_challenge div.errors')[0].innerHTML = ''; $('challenge_spinner').show();", :url => investigation_challenges_url(@investigation), :html => {:action=>investigation_challenges_url(@investigation), :id => 'new_challenge_form', :class => "ChallengeForm"}) do |f|
+                  %label.box{"for"=>"challenge[title]"}
+                    ="#{'Title'.l}:"
+                    %em="(#{"Required".l})"
+                    = f.text_field :title, :size => 35, :value=>"(What you want to be done)"
+      
+                  %label.box
+                    Description
+                    = text_area :challenge, :description
+                  
+                  %label{"for"=>"url"}= "Add an external link <em>(optional)</em>"
+                  = f.text_field :url, :class => "primary"
+
+                  %label{"for"=>"url_description"}= "Describe the link <em>(optional)</em>"
+                  = f.text_field :url_description, :class => "primary"
+
+                  = hidden_field_tag :investigation_id, @investigation.id
+                  %p.button
+                    = submit_tag "Add this".l
+                    = image_tag 'spinner.gif', :plugin => "community_engine", :style => 'display:none;', :id => 'challenge_spinner'
+        
+        
+            .clear
+          
+            .yui-gb
+              #incomplete_challenges.yui-u.first
+                %h3.top
+                  To do
+                =render :partial => 'challenges/challenge', :collection => @investigation.incomplete_challenges
+                %a#inserted_challenge
+                %a#newest_challenge
+              
+              #ongoing_challenges.yui-u
+                %h3.top
+                  Help still needed
+                =render :partial => 'challenges/challenge', :collection => @investigation.updated_challenges
+              
+              #completed_challenges.yui-u
+                %h3.top
+                  Completed
+                =render :partial => 'challenges/challenge', :collection => @investigation.completed_challenges
+              
+    
+          - if @investigation.allows_contributions_from?(current_user) and 1 == 0
+            #comments.box.hfeed.comments.clear
+              %h2.left= "Links"
+          
+              %p.button.right.add_a_link
+                = link_to_remote("Add a link", :after => "Element.toggle('add_a_comment')")
+              .clear
+              #add_a_comment.hide
+            
+                - if logged_in?
+                  - content_for :scripts do    
+                
+                    %script{:type=>"text/javascript"} 
+                      :plain
+                        function scrollToNewestComment(){
+                          loc = document.location.toString();
+                          if (loc.indexOf("#") != -1){
+                            parts = loc.split('#')
+                            loc = parts[0] + "#newest_comment"
+                          } else {
+                            loc = loc + "#newest_comment";
+                          }
+                          document.location.href = loc;
+                        }
+
+                  .errors
+                  - form_remote_for(:comment, :loading => "$$('div#comments div.errors')[0].innerHTML = ''; $('comment_spinner').show();", :url => investigation_comments_url(@investigation), :html => {:id => 'new_comment_form', :class => "CommentForm"}) do |f|
+                    %label.box{"for"=>"comment[link"}
+                      ="#{'Link'.l}:"
+                      %em="(#{"Required".l})"
+                      = f.text_field :link, :size => 35, :value=>"http://"
+        
+                    %label.box
+                      Description
+                      %em="Please keep factual!"
+                      = text_area :comment, :comment     
+
+                    = hidden_field_tag :commentable_type, "Investigation"
+                    = hidden_field_tag :commentable_id, @investigation.id
+                    = hidden_field_tag :investigation_id, @investigation.id
+                
+                    %p.button
+                      = submit_tag "Add this".l
+                      = image_tag 'spinner.gif', :plugin => "community_engine", :style => 'display:none;', :id => 'comment_spinner'
+    
+    
+              - if 1 == 0
+                = render :partial => 'comments/comment', :collection => @investigation.comments
+                %a#newest_comment
+          
+                %span#more_comments_links= more_comments_links(@investigation)
+
+    - begin
+      - unless @related.empty?
+        .box.alt
+          %h3=:related_investigations.l
+          %ul.list.investigate
+            - @related.each do |inv|
+              %li=link_to truncate(inv.question, :length => 75), investigation_path( inv)      
+    - rescue
+    
+    %p
+      &nbsp;
+    
+    -if @investigation.allows_contributions_from?(current_user) || admin?  
+      .button.box
+        -if @investigation.completed
+          = button_to "Reopen this investigation", uncomplete_investigation_path(@investigation), {:method => :post}
+        -else
+          %h2
+            All done?
+        
+          = button_to "Mark this investigation as complete", complete_investigation_path(@investigation), {:method => :post}
+
+= render :partial => 'investigation_right'
+
+          

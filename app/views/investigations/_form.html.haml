@@ -1,0 +1,20 @@
+%label{"for"=>"investigation_question"}= :investigation_question.l
+%investigation_question
+  = form.text_field :question, :class => "primary"
+
+%label{"for"=>"investigation_body"}= :investigation_description.l
+= form.text_area :description, :rows => 4
+
+
+- if current_user.admin?
+  %label{"for"=>"published_as"}= :published_as.l
+  #published_as
+    /= form.text_field :published_as, :class => "primary"
+    = select :investigation, :published_as, {"live"=>"live", "draft"=>"draft"}
+    
+%label= "Tags: (keywords to describe your investigation, separated by spaces)"
+= text_field_tag 'tag_list', @investigation.tag_list, {:autocomplete => "off", :size => 35}
+#tag_list_auto_complete.auto_complete
+- content_for :scripts do
+  = auto_complete_field 'tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [',', ' ']  }
+

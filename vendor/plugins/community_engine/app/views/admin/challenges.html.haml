@@ -1,0 +1,50 @@
+- @section = "admin"
+- @subsection = "challenges"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+#yui-main
+  .yui-b.box
+    %h3
+      = :challenges.l
+
+    -if @challenges.page_count > 1
+      .pagination= paginating_links @challenges, :link_to_current_page => true
+
+    %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%"}
+      %tr
+        %th="Who"
+        %th=:challenge.l
+        %th &nbsp;
+        %th &nbsp;
+        %th &nbsp;
+        %th &nbsp;
+        
+      - @challenges.each do |challenge|
+        %tr{:id => "challenge_#{challenge.id}", :class => challenge.published_as}
+          %td
+            -if challenge.user
+              = link_to h(challenge.user.login), user_path(challenge.user)
+            -else
+              = link_to_unless(challenge.author_url.blank?, h(challenge.username), h(challenge.author_url)){ h(challenge.username) }              
+              %br
+              %small="(#{challenge.author_url})"
+          %td
+            ="#{link_to h(challenge.question), investigation_challenge_url(challenge)}"
+          %td
+          
+          %td
+            ="#{link_to 'Edit', edit_investigation_challenge_url(challenge)}"
+          %td
+            =link_to_remote("Trash".l, {:url => trash_investigation_challenge_path(challenge.investigation, challenge), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "challenge_#{challenge.id}"), :confirm => "Are you sure you want to put this challenge in the trash?"} )
+          %td
+            %div{:id => "moderate_investigation_challenge_#{challenge.id}"}
+              -if challenge.is_live?
+                =link_to_remote("Moderate".l, {:url => moderate_investigation_challenge_path(challenge.investigation, challenge), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "moderate_investigation_challenge_#{challenge.id}")})
+              -unless challenge.is_live?
+                =link_to_remote("Publish".l, {:url => publish_investigation_challenge_path(challenge.investigation, challenge), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "challenge_#{challenge.id}")})
+            
+            
+
+    -if @challenges.page_count > 1
+      .pagination= paginating_links @challenges, :link_to_current_page => true

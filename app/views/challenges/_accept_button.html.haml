@@ -1,0 +1,13 @@
+- challenge = accept_button
+- if logged_in?
+  - task = challenge.undertaking_for(current_user)
+  /- debugger
+
+  
+  - if task.blank?
+    - unless challenge.completed
+
+      .right
+    
+        .button
+          = button_to("Accept this challenge", investigation_challenge_tasks_path(challenge.investigation, challenge))

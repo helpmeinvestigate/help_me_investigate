@@ -1,0 +1,8 @@
+/= render :partial => 'about_nav'
+
+#yui-main
+  .yui-b
+    .box
+      %h2
+        Ethical Guidelines
+      = render :simpleCMS => "Base:Ethics", :admin => logged_in? && admin?

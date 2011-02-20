@@ -1,0 +1,152 @@
+/*
+Textee theme 
+by Justin Hernandez
+blog.transphorm.com
+justin@transphorm.com
+For use with Coderay output http://rd.cycnus.de/coderay/
+For more information see
+http://rd.cycnus.de/coderay/doc/classes/CodeRay/Encoders/HTML.html
+Thanks to Rob Orsini for getting this plugin started
+http://blog.tupleshop.com/2006/7/20/code-syntax-highlighting-in-mephisto-with-coderay
+*/
+
+
+.CodeRay {
+  background-color: black;
+  border: 1px solid silver;
+  font-family: "lucida grande", verdana, sans-serif;
+  color: white;
+}
+.CodeRay pre { margin: 0px }
+
+/* 
+If you use line_numbers="inline" then adjust these settings.
+However color scheme will have to be adjusted as they are tweaked
+for line_numbers="table"
+*/
+div.CodeRay {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-collapse: collapse; width: 100%; padding: 10px
+  font-family: "lucida grande", verdana, sans-serif;
+  font-size: 10pt;
+ }
+
+span.CodeRay { 
+
+ }
+
+/* If you use line_numbers="table" then adjust these settings */
+/* default settings width 80% sets code width */
+table.CodeRay { 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-collapse: collapse; width: 75%; padding: 10px
+  font-family: "lucida grande", verdana, sans-serif;
+  font-size: 1.25em;
+}
+
+table.CodeRay td { padding: 2px 4px; vertical-align: top }
+
+.CodeRay .line_numbers, .CodeRay .no {
+  background-color: #DDEEFF;
+  color: #787878;
+  text-align: right;
+}
+.CodeRay .line_numbers tt { font-weight: bold }
+.CodeRay .no { padding: 0px 4px }
+.CodeRay .code { width: 100% }
+
+ol.CodeRay { font-size: 10pt }
+ol.CodeRay li { white-space: pre }
+
+.CodeRay .code pre { overflow:auto; width:39.5em; overflow-y:hidden }
+
+.CodeRay .af { color:#00C }
+.CodeRay .an { color:#007 }
+.CodeRay .av { color:#700 }
+.CodeRay .aw { color:#C00 }
+.CodeRay .bi { color:#509; font-weight:bold }
+/* #comments */
+.CodeRay .c  { color:#AB50D6 }
+
+.CodeRay .ch { color:#04D }
+.CodeRay .ch .k { color:#04D }
+.CodeRay .ch .dl { color:#039 }
+
+.CodeRay .cl { color:#FFFFFF; font-weight:bold }
+/* controller names Controller.method */
+.CodeRay .co { color:#BB0066; font-weight:bold }
+.CodeRay .cr { color:#0A0 }
+.CodeRay .cv { color:#369 }
+.CodeRay .df { color:#099; font-weight:bold }
+.CodeRay .di { color:#088; font-weight:bold }
+.CodeRay .dl { color:black }
+.CodeRay .do { color:#970 }
+.CodeRay .ds { color:#D42; font-weight:bold }
+.CodeRay .e  { color:#666; font-weight:bold }
+.CodeRay .en { color:#800; font-weight:bold }
+.CodeRay .er { color:#F00; background-color:#000000 }
+.CodeRay .ex { color:#F00; font-weight:bold }
+.CodeRay .fl { color:#60E; font-weight:bold }
+/* defintion name e.g. index, initialize */
+.CodeRay .fu { color:#FFFFFF }
+.CodeRay .gv { color:#d70; font-weight:bold }
+.CodeRay .hx { color:#058; font-weight:bold }
+/* numbers */
+.CodeRay .i  { color:#0000DD; font-weight:bold }
+.CodeRay .ic { color:#B44; font-weight:bold }
+
+.CodeRay .il { background: #000000 }
+.CodeRay .il .il { background: #000000 }
+.CodeRay .il .il .il { background: #000000 }
+.CodeRay .il .dl { font-weight: bold ! important; color: yellow ! important }
+
+.CodeRay .in { color:#B2B; font-weight:bold }
+/* @variable */
+.CodeRay .iv { color:#E60000; font-weight:bold }
+.CodeRay .la { color:#970; font-weight:bold }
+.CodeRay .lv { color:#963 }
+.CodeRay .oc { color:#40E; font-weight:bold }
+.CodeRay .on { color:#000; font-weight:bold }
+.CodeRay .op { }
+/* nil true false */
+.CodeRay .pc { color:#FFFF00; font-weight:bold }
+.CodeRay .pd { color:#369; font-weight:bold }
+.CodeRay .pp { color:#579 }
+.CodeRay .pt { color:#339; font-weight:bold }
+/* def end class */
+.CodeRay .r  { color:#DE9309; font-weight:bold }
+
+.CodeRay .rx { background-color:#000000 }
+.CodeRay .rx .k { color:#0000FF }
+.CodeRay .rx .dl { color:#0000FF }
+.CodeRay .rx .mod { color:#C2C }
+.CodeRay .rx .fu  { color:#404; font-weight: bold }
+
+.CodeRay .s  { background-color:#000000 }
+.CodeRay .s  .s { background-color:#000000 }
+.CodeRay .s  .s  .s { background-color:#000000 }
+.CodeRay .s  .k { color:#00FF00 }
+.CodeRay .s  .dl { color:#00FF00 }
+
+.CodeRay .sh { background-color:#000000 }
+.CodeRay .sh .k { color:#2B2 }
+.CodeRay .sh .dl { color:#161 }
+/* :hash */
+.CodeRay .sy { color:#2C83B7; font-weight:bold }
+.CodeRay .sy .k { color:#2C83B7 }
+.CodeRay .sy .dl { color:#630 }
+
+.CodeRay .ta { color:#070 }
+.CodeRay .tf { color:#070; font-weight:bold }
+.CodeRay .ts { color:#D70; font-weight:bold }
+.CodeRay .ty { color:#339; font-weight:bold }
+.CodeRay .v  { color:#036 }
+.CodeRay .xt { color:#444 }
+
+/*
+      <p>
+      <a href="http://feeds.feedburner.com/transphorm"><img src="http://feeds.feedburner.com/~fc/transphorm?bg=7FD4FF&amp;fg=555555&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a>
+      </p>
+*/

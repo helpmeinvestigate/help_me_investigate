@@ -1,0 +1,15 @@
+#SubNavBar
+ 
+
+  %ul
+    = subnav_tab :dashboard.l, { :url =>admin_path, :subsection => 'dashboard' }
+    = subnav_tab :forums.l, { :url =>forums_path, :subsection => 'forums' }
+    = subnav_tab :activity.l, { :url =>admin_activities_path, :subsection => 'activity'}
+    = subnav_tab :investigations.l, { :url =>admin_investigations_path, :subsection => 'investigations'}
+    /= subnav_tab :blanks.l, { :url =>admin_blanks_path, :subsection => 'blanks'}
+    = subnav_tab :comments.l, { :url =>admin_comments_path, :subsection => 'comments'}
+    /= subnav_tab :features.l, { :url =>homepage_features_path, :subsection => 'features'}
+    = subnav_tab :statistics.l, { :url =>statistics_path, :subsection => 'statistics'}
+    = subnav_tab :users.l, { :url =>admin_users_path, :subsection => 'users'}
+    = subnav_tab "Invite someone", { :url =>invite_user_path(current_user), :subsection => 'users'}
+  .clear

@@ -1,0 +1,8 @@
+/= render :partial => 'about_nav'
+
+#yui-main
+  .yui-b
+    .box
+      %h2
+        Privacy Policy
+      = render :simpleCMS => "Base:Privacy", :admin => logged_in? && admin?

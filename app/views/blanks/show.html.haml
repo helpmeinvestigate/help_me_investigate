@@ -1,0 +1,51 @@
+
+- @section = "investigations"
+- @meta = { :description => "#{@investigation.question}", :keywords => "#{@investigation.tags.join(", ") unless @investigation.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+- @investigation = @blank.investigation
+
+/%h3= link_to "&laquo; Back to “" + @blank.investigation.question + "”", investigation_path(@blank.investigation)
+
+
+#yui-main.full_investigation
+  .yui-b
+  
+    = render :partial => 'investigations/investigation_top'
+    
+    .box
+      %h3
+        = link_to "« Back to the investigation", investigation_path(@investigation)
+      
+    = render :partial => 'investigations/fill_in_the_blanks'
+   
+
+    - if @blank.investigation.allows_contributions_from?(current_user)  and 1==0
+      .consensus
+        = error_messages_for :blank
+        - form_for(:blank, :url => investigation_blank_path(@blank.investigation, @blank), :html => { :method => :put, :class =>'MainForm' }) do |f|
+          %h3= "The consensus on this blank: "
+          /%label{"for"=>"investigation_question"}= :consensus.l
+          #consensus.left
+            = f.text_field :consensus, :class => "primary"
+
+          %p.right.save_or_cancel= submit_tag :save_blank.l, :or => link_to(:cancel.l, investigation_path(@blank.investigation))
+          .clear
+      
+    .single_blank
+      #comments.box.hfeed.comments.clear
+        .rss.right
+          %span
+            = link_to 'RSS', formatted_comments_url(@blank.investigation, @blank, :rss)
+        %h3= 'Evidence'
+        
+        
+        %a#newest_comment
+        = render :partial => 'comments/comment', :collection => @blank.comments        
+      
+
+    .button
+      = button_to "Request moderation of this blank".l, moderate_investigation_blank_path(@investigation, @blank), {:method=> :post, :confirm => "Are you sure you want to request moderation? The blank will no longer be public awaiting input from the moderator. "}
+
+= render :partial => 'investigations/investigation_right'
+
+/#h3="Audit trail"
+/= render :partial => 'blanks/audit', :collection => @blank.audits

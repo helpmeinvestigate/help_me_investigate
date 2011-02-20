@@ -1,0 +1,26 @@
+= javascript_include_merged :base
+= javascript_include_merged :admin if admin?
+
+= javascript_include_tag 'tiny_mce/tiny_mce' if admin?
+= javascript_include_tag 'tiny_mce_init' if admin?
+
+= yield :scripts
+
+
+- if current_page?(:controller => 'photos', :action => 'new')
+  = javascript_include_tag 'swfupload'
+  = javascript_include_tag 'uploader'
+- if current_page?({:controller => 'posts', :action => 'show' })
+  = javascript_include_tag 'lightbox'
+- if forum_page?
+  = javascript_include_tag 'lowpro', 'forum'  
+
+%script{:type=>"text/javascript"}
+  ='var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com"; document.write(unescape("%3Cscript src=\'" + uservoiceJsHost + "/javascripts/widgets/tab.js\' type=\'text/javascript\'%3E%3C/script%3E"))'
+%script{:type=>"text/javascript"}
+  = 'UserVoice.Tab.show({ key: \'hmi\', host: \'hmi.uservoice.com\', forum: \'general\', alignment: \'left\', background_color:\'#f00\', text_color: \'white\', hover_color: \'#06C\', lang: \'en\'})'
+- if RAILS_ENV == "production" || 1==1
+  %script{:type=>"text/javascript"}
+    ='var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));'
+  %script{:type=>"text/javascript"}
+    = 'try { var pageTracker = _gat._getTracker("UA-6293231-2"); pageTracker._trackPageview(); } catch(err) {}'

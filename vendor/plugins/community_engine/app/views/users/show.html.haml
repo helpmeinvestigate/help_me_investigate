@@ -1,0 +1,168 @@
+- @meta = { :description => "#{@user.login}'s profile on #{AppConfig.community_name}.", :keywords => "#{@user.login}, #{@user.tags.join(", ") unless @user.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+- @section = @user.eql?(current_user) ? 'my_profile' : 'users'
+- @subsection = @user.eql?(current_user) ? 'my_profile' : 'users'
+- @sidebar_left = true
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+
+.yui-b
+  .box
+    
+    
+    #profile_details.box.hentry
+      = link_to image_tag( @user.avatar_photo_url(:thumb), :class => "polaroid" ), user_path(@user)
+
+      .right
+        = help_tooltip('user_tags_etc')
+            
+      %h3
+        I'm 
+        = link_to @user.login, user_path(@user)
+        
+        %br
+        I'm investigating
+        %a{:class=>'spch-bub-inside', :href=>user_investigations_path(@user)}
+          %em= pluralize(@investigations.size - @completed_investigations.size, "thing")
+        
+        %br
+        I have accepted
+        %a{:class=>'spch-bub-inside', :href=>user_tasks_path(@user)}
+          %em= pluralize(@tasks.size, "challenge")
+        %br
+        and contributed
+        /%a{:class=>'spch-bub-inside', :href=>user_comments_path(@user)}
+        %span.spch-bub-inside
+          %em= pluralize(@comments.size, "update")
+        %br
+        to
+        /%a{:class=>'spch-bub-inside', :href=>user_investigations_path(@user)}
+        %span.spch-bub-inside  
+          %em= pluralize(@completed_investigations.size, "completed investigation")
+        
+      - if @user.website
+        %h3.website
+          = link_to @user.website, @user.website
+      
+      - if @user.blog
+        %h3.blog
+          = link_to @user.blog, @user.blog
+      
+      - if @user.twitter_username
+        %h3.twitter
+          = link_to @user.twitter_username, "http://twitter.com/#{@user.twitter_username}"
+        
+      - if @user.tags.any?
+        %h3
+          I'm interested in these tags:
+          %br
+          = "#{@user.tags.collect{|t| link_to t.name, tag_url(t) }.join(", ")}"
+
+      
+
+
+            
+      .box
+        .edit
+          - if @is_current_user
+            - if @user.avatar
+              = @user.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
+              = @user.featured_writer ? "<div class='right_corner'><div class='featured_writer'></div></div>" : ''
+              /= link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)
+            - else 
+              =:no_profile_photo.l
+              = link_to :click_here_to_upload_one.l, edit_user_path(@user)
+
+
+        /= image_tag( @user.avatar_photo_url(:medium), :class => "polaroid")    
+
+      - if current_user and current_user.can_request_friendship_with(@user)
+        /= add_friend_link(@user)
+      
+      - unless @is_current_user
+        - if logged_in?
+          %h3.private_message
+            = link_to('Send this user a private message', current_user.login + '/messages/new?message[to]=' + @user.login)
+
+      /%h3=:my_details.l
+      .vcard.author
+        %ul
+          %li.update
+            %a{:href=>"#{user_path(@user)}", :rel=>"bookmark"}
+              %abbr.published{:title=>"#{@user.created_at}"}
+                = :member_since.l + @user.created_at.strftime(": %m/%d/%y")          
+          %li.view
+            =:profile_views.l
+            = "(#{@user.view_count})"
+          - if @user.offerings.any?
+            %li.skills= :my_skills.l+": #{@user.offerings.collect{|o| link_to o.skill.name, skill_url(o.skill) }.join(', ')}"
+
+      .clear
+    
+
+  - if @user.description
+    = clean @user.description
+    
+  - if current_user && current_user.admin?
+    .box.first_alt.alt
+      %h3
+        =:admin_controls.l
+      = link_to( "&raquo; #{:assume_user_id.l}", assume_user_path(@user) )
+      %br/
+      = link_to( "&raquo; #{:delete_this_user.l}", user_path(@user), {:method => :delete, :confirm => :are_you_sure_you_want_to_permanently_delete_this_user.l} )
+      %br/
+      = link_to( "&raquo; #{:toggle.l} #{:featured_writer.l}", toggle_featured_user_path(@user), {:method => :put} )
+      %br/
+      = link_to( "&raquo; #{:assign_role.l}: #{@user.moderator? ? :member.l : :moderator.l}", toggle_moderator_user_path(@user), {:method => :put} )
+    .box.alt
+      %h3
+        Email update preferences
+      %ul#email_preferences
+        %li{:class=> @user.notify_investigations ? "receive" : "not_receive"}
+          Investigations
+        %li{:class=> @user.notify_comments ? "receive" : "not_receive"}
+          Challenges
+        %li{:class=> @user.daily_digest ? "receive" : "not_receive"}
+          Daily digest
+        %li{:class=> @user.weekly_digest ? "receive" : "not_receive"}
+          Weekly digest
+
+
+/  #friends.box.alt
+/    %h3
+/      =:my_friends.l
+/      = link_to "(#{@friend_count})", accepted_user_friendships_path(@user) if @friend_count > 5
+/    = link_to "&raquo; #{:invite_a_friend.l :site => AppConfig.community_name}", invite_user_path(@user) if @is_current_user
+/    %br
+/    = link_to "&raquo; #{:view_all_my_friend_requests.l} (#{@pending_friendships_count})", pending_user_friendships_path(@user) if @is_current_user
+/    %br
+/    %br
+/    - @accepted_friendships.each do |user|
+/      =render :partial => "users/sidebar_user", :locals => {:user => user}
+/    -if @accepted_friendships.size > 4
+/      %h6.all
+/        =link_to :see_all.l, accepted_user_friendships_path(@user)
+
+
+#yui-main
+  .yui-b
+
+    - unless @investigations.empty?
+      #investigations.box
+        %h2
+          My investigations
+        = render :partial => 'investigations/investigation', :collection => @investigations
+
+    - if @user == current_user
+      - unless @recommendations.empty?
+        #recommended_investigations.box
+          %h2
+            We'd recommend you try these
+          = render :partial => 'investigations/investigation', :collection => @recommendations
+
+    - unless @tasks.empty?
+      #tasks.box
+        %h2
+          My challenges
+        .challenges
+          = render :partial => 'tasks/mini_task', :collection => @tasks

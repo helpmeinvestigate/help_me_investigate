@@ -1,0 +1,100 @@
+- @section = 'admin'
+- @subsection = 'statistics'
+- content_for :sub_nav do
+  =render :partial => "admin/subnav"
+  
+.yui-b.sidebar
+
+#yui-main
+  .yui-b.main_column.box
+    %h2= :statistics.l
+    
+    %h3
+      Graph of user activity
+    = ziya_chart( activities_chart_statistics_url(:range => params[:range]), {:bgcolor => '#ffffff', :width => 600, :height => 400, :id => "Activities", :swf_path => "/charts/"} )
+    
+    %h3
+      Server uptime
+      
+    %iframe{:src=>"http://www.pingdom.com/reports/h2vcq0wxb8gb/check_overview/?name=Help+Me+Investigate", :width=>600, :height=>400, :id=>"uptime"}
+    
+    %p= link_to 'Server Density report', 'https://hmi.serverdensity.com/servers/view/1/'
+    
+    %h3
+      Apache status
+    %iframe{:src=>"http://helpmeinvestigate.com/server-status?auto", :width=>600, :height=>200, :id=>"apache_status"}
+      
+    
+    .yui-g.box.top
+      .yui-u.first
+        %h2 
+          Users
+        %h3
+          = :total_users.l+":"
+          = @total_users
+
+        %h3
+          = :unactivated_users.l+":"
+          = @unactivated_users
+        %h3
+          = :new_today.l+":"
+          = @today_new_users.size
+        %ul
+          - @today_new_users.each do |user|
+            %li= link_to user.login, user_path(user)
+
+        %h3
+          = :new_yesterday.l+":"
+          = @yesterday_new_users.size
+        %ul
+          - @yesterday_new_users.each do |user|
+            %li= link_to user.login, user_path(user)
+
+        %h3
+          Active
+          = pluralize @active_users_count, :user.l, :users.l
+          (
+          = number_to_percentage((@active_users_count/@total_users.to_f)*100, :precision => 1)
+          =", 1 "+:month.l+")"
+        %h3
+          = :most_active_1_month.l
+        %ul
+          - @active_users.each do |user|
+            %li
+              = link_to user.login, user_path(user.id)
+              \(
+              = user.activities_count
+              \)
+
+   
+        %h3
+          =:male.l+":"
+          = number_to_percentage @percent_male
+          =", "+:female.l+":"
+          = number_to_percentage @percent_female
+      .yui-u
+        
+        %h2
+          Investigations
+          
+        %h3
+          Number of investigations
+          = Investigation.count(:all)
+        %h3
+          Number of investigatings
+          = Investigating.count(:all)
+        %h3
+          Average investigatings per user
+          = Investigating.count(:all) / @total_users
+        %h3
+          Average investigations per user
+          = Investigation.count(:all) / @total_users
+          
+        %h2
+          Invitations
+          
+        %h3
+          Number of invitations sent (each can include multiple email addresses)
+          = Invitation.count(:all)
+
+  

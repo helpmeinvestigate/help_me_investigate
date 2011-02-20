@@ -1,0 +1,18 @@
+- @section = "investigations"
+- @subsection = "mine"
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+#yui-main
+
+  .yui-b
+  
+    .box
+      %h2="My investigations"
+    
+    .box.investigations.hfeed
+
+      = render :partial => 'investigation', :collection => @investigations
+
+.yui-b
+  = render :partial => "find_investigations_right"

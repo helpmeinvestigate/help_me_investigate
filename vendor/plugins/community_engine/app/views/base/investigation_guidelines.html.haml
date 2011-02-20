@@ -1,0 +1,8 @@
+/= render :partial => 'about_nav'
+
+#yui-main
+  .yui-b
+    .box
+      %h3
+        Investigation Guidelines
+      = render :simpleCMS => "Base:InvestigationGuidelines", :admin => admin?

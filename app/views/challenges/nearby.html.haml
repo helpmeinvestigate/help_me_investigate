@@ -1,0 +1,16 @@
+- @section = "challenges"
+- @subsection = "nearby"
+
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+  
+#yui-main
+  .challenges.box
+  
+    %h2 
+      Nearby challenges
+
+    = render :partial => 'challenges/challenge', :collection => @challenges
+
+    = link_to "Set a new challenge", new_investigation_challenge_path(@investigation)

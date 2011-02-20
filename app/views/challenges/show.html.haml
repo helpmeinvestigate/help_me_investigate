@@ -1,0 +1,199 @@
+- @section = "challenges"
+- @subsection = "all"
+- @investigation = Investigation.find_by_id(@challenge.investigation.id)
+- @task = @challenge.undertaking_for(current_user)
+
+- content_for :sub_nav do
+  =render :partial => "subnav"
+
+
+- if(admin?)
+  #admin
+    -unless @challenge.is_live?
+      %div{:id => "publish_investigation_challenge#{@challenge.id}", :class=>"admin_notice"}
+        %h3.box
+
+          - if @challenge.is_moderate?
+            Moderation has been requested on this challenge and it is not live
+
+          - if @challenge.is_draft?
+            This is a new challenge awaiting approval and is not live
+        %h3
+          =link_to_remote("Publish this challenge", {:url => publish_investigation_challenge_path(@challenge.investigation,@challenge), :method => :post, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "publish_investigation_challenge#{@challenge.id}")})
+          |
+          =link_to "Edit it", edit_investigation_challenge_path(@challenge.investigation, @challenge)
+          |
+          = link_to('Message the author', '/' + current_user.login + '/messages/new?message[to]=' + @challenge.user.login)
+          |
+          = link_to('Message the investigation author', '/' + current_user.login + '/messages/new?message[to]=' + @challenge.investigation.user.login)
+
+#breadcrumb
+  %span
+    &laquo;
+    = link_to @challenge.investigation.question, investigation_path(@challenge.investigation)
+
+.yui-b
+  .box.investigators
+    %h3.started_by.box
+
+      %a.left{:href=>"#{user_path(@challenge.user)}",  :class=>"photo", :rel=>"bookmark"}
+        =image_tag((@challenge.user.avatar_photo_url(:thumb)), :alt=>@challenge.user.login, :width=>"50", :height=>"50")
+      Set by
+      %br
+      = link_to(@challenge.user.login, user_path(@challenge.user))
+  - unless @challenge.tasks_not_counting_creator.empty?
+    .box
+      %h3.joined_by
+        Accepted by 
+
+      = render :partial => 'tasks/user', :collection => @challenge.tasks_not_counting_creator
+           
+ 
+  -if  (@challenge.user == current_user) || admin? || moderator?
+    .box.alt
+      %h3=:administer_this_challenge.l
+      %ul.list.admin
+        %li.edit= link_to :edit.l, edit_investigation_challenge_path(@challenge.investigation, @challenge)
+        %li.trash= link_to :trash.l, trash_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post, :confirm => :send_this_challenge_to_the_trash.l}
+        
+        -if admin? || moderator?
+          
+          %li.delete= link_to :delete.l, challenge_path(@challenge.investigation, @challenge), {:method => :delete, :confirm => :permanently_delete_this_challenge.l}
+          -if @challenge.locked
+            %li.unlock= link_to :unlock.l, unlock_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+          -else
+            %li.lock= link_to :lock.l, lock_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+
+          -if @challenge.completed
+            %li.uncomplete= link_to :uncomplete.l, uncomplete_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+          -else
+            %li.complete= link_to :complete.l, complete_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+
+          -if @challenge.featured
+            %li.unfeature= link_to :unfeature.l, unfeature_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+          -else
+            %li.feature= link_to :feature.l, feature_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+
+    .button.request_moderation
+      = button_to "Request moderation".l, moderate_investigation_challenge_path(@challenge.investigation, @challenge), {:method=> :post, :confirm => "Are you sure you want to request moderation? The challenge will no longer be public awaiting input from the moderator."}
+ 
+        
+#yui-main.full_challenge{:class=> @challenge.css_classes(current_user)}
+  .yui-b
+    
+    
+    #right_speech
+      .speech_background
+        .speech_icon
+          = image_tag 'right_speech_14.gif'
+
+    #challenge-title.box
+   
+      = render :partial => "challenges/accept_button", :object => @challenge
+    
+      %h2
+        = @challenge.title
+        
+      - if @task
+        #monitoring
+          = render :partial => "tasks/monitoring", :object => @task
+
+      .box.description.clear
+        = clean @challenge.description
+        
+      -if @challenge.url && @challenge.url != 'http://'
+        %h3.challenge-url
+          Link:
+          - unless @challenge.url_description.blank?
+            
+            = link_to @challenge.url_description, @challenge.url
+            
+          - else
+            = link_to @challenge.url, @challenge.url
+        
+      
+      - if @challenge.investigation.allows_contributions_from?(current_user) #&& ( ! @task.blank? )
+        .clear
+
+        - hide_class = 'show'
+
+        #add_a_comment{ :class=>hide_class  }
+
+          - if logged_in?
+
+
+            #comments
+              .errors
+            - form_remote_for(:comment, :loading => "$$('div#comments div.errors')[0].innerHTML = ''; $('comment_spinner').show();", :url => investigation_challenge_comments_url(@challenge.investigation, @challenge), :html => {:id => 'new_comment_form', :class => "CommentForm"}) do |f|
+              %h3="Add an update"
+
+
+              %label.box
+                = text_area :comment, :comment     
+
+              %label.box{"for"=>"comment[link"}
+                ="Web link (optional):"
+                = f.text_field :link, :size => 35, :value=>"http://"
+
+              //- unless @challenge.undertaking_for(current_user).blank? || admin?
+              %label.box{"for"=>"completed"}
+                ="I have completed the challenge"
+                = check_box_tag :completed
+                - unless @task.blank? || admin?
+                  = hidden_field_tag :task_id, @task.id 
+
+              = hidden_field_tag :commentable_type, "Challenge"
+              = hidden_field_tag :commentable_id, @challenge.id
+              = hidden_field_tag :investigation_id, @challenge.investigation.id
+              %p.button
+                = submit_tag "Add this".l
+                = image_tag 'spinner.gif', :plugin => "community_engine", :style => 'display:none;', :id => 'comment_spinner'
+
+  
+  
+      - if @challenge.investigation.allows_contributions_from?(current_user) 
+              
+        #comments.box.hfeed.comments.clear.top
+          %h2.left= "Updates"
+          %p.right.quiet= "(Links, documents, photos, videos from around the web)"
+          .clear
+          
+          %a#newest_comment
+          %a#insert_comment
+          = render :partial => 'comments/comment', :collection => @challenge.comments.reverse
+        
+    
+      
+
+        %p
+          &nbsp;
+
+        /%span#more_comments_links= more_comments_links(@challenge)
+          
+        - if @challenge.investigation.allows_contributions_from?(current_user)
+        
+          = render :partial => "challenges/quit_button", :object => @challenge
+        
+        
+          -if @challenge.completed
+            .button
+              = link_to :uncomplete.l, uncomplete_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+          -else
+            .button
+              = link_to :complete.l, complete_investigation_challenge_path(@challenge.investigation, @challenge), {:method => :post}
+        
+
+      - else
+        /.yui-u
+        /= render :partial => "challenges/accept_or_quit_button", :object => @challenge
+        
+/- content_for :scripts do
+/  :javascript
+/    $$('.comment').invoke('observe', 'mouseover', function(event){ 
+/    Event.element(event).down('li.delete').show();   
+/    Event.element(event).down('li.moderate').show();
+/    }).invoke('observe', 'mouseout', function(event){ 
+/    Event.element(event).down('li.delete').hide();   
+/    Event.element(event).down('li.moderate').hide();
+/    })
+  
